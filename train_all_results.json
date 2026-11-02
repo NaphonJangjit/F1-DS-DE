@@ -1,0 +1,130 @@
+{
+  "features": [
+    "Track_Status",
+    "Tyre_Age_Total",
+    "Track_Status_Inferred",
+    "Prev_Avg_Speed_Corners",
+    "Prev_Avg_Speed_Straight",
+    "Prev_Duration",
+    "Prev_Sector_Duration",
+    "Clean_Pace",
+    "Best_Duration_So_Far",
+    "Prev_Full_Throttle_Pct",
+    "Prev_Brake_Pct",
+    "Prev_DRS_Pct",
+    "Prev_Max_Speed",
+    "Prev_Min_Speed",
+    "Prev_Avg_Gear",
+    "Prev_I1_Speed",
+    "Prev_I2_Speed",
+    "Prev_St_Speed",
+    "Interval_Ahead",
+    "Traffic_Within_1s",
+    "Traffic_Within_2s",
+    "Traffic_Within_5s",
+    "Will_Box",
+    "Prev_Lap_Pitted",
+    "Prev_Lap_Box_Duration",
+    "Pit_Stops_Done",
+    "Track_Temperature",
+    "Rainfall",
+    "Pressure",
+    "Humidity",
+    "Air_Temperature",
+    "Total_Sector_Length",
+    "Total_Straight_Length",
+    "Total_Distance_Driven",
+    "Distance_On_Tyre",
+    "Tyre_Age_SOFT",
+    "Tyre_Age_MEDIUM",
+    "Tyre_Age_HARD",
+    "Tyre_Age_INTERMEDIATE",
+    "Tyre_Age_WET",
+    "Lap"
+  ],
+  "results": [
+    {
+      "model": "RandomForest",
+      "MAE_s": 0.27901055265059094,
+      "RMSE_s": 0.7151419252801746,
+      "R2_log": 0.9925887527098214,
+      "train_MAE_s": 0.07383406027161335,
+      "train_R2_log": 0.9994653823649733,
+      "fit_sec": 260.9
+    },
+    {
+      "model": "HistGradientBoosting",
+      "MAE_s": 0.2931378101520574,
+      "RMSE_s": 0.6605160316658968,
+      "R2_log": 0.9935381733776706,
+      "train_MAE_s": 0.1761337910752655,
+      "train_R2_log": 0.9983682333776291,
+      "fit_sec": 8.7
+    },
+    {
+      "model": "GradientBoosting",
+      "MAE_s": 0.3146574798542723,
+      "RMSE_s": 0.6805249773654097,
+      "R2_log": 0.9922634807291657,
+      "train_MAE_s": 0.23375827251080816,
+      "train_R2_log": 0.9935644338916746,
+      "fit_sec": 438.7
+    },
+    {
+      "model": "ExtraTrees",
+      "MAE_s": 0.3283452702495019,
+      "RMSE_s": 0.7154651356844791,
+      "R2_log": 0.9925219993821572,
+      "train_MAE_s": 0.03400417711015678,
+      "train_R2_log": 0.999851638040676,
+      "fit_sec": 176.9
+    },
+    {
+      "model": "Stacking Ensemble",
+      "MAE_s": 0.3452337089958075,
+      "RMSE_s": 0.6735109332527349,
+      "R2_log": 0.9927283407380523,
+      "train_MAE_s": 0.2544701753732054,
+      "train_R2_log": 0.9962062891068385,
+      "fit_sec": 1085.4
+    },
+    {
+      "model": "Lasso",
+      "MAE_s": 0.899004712095665,
+      "RMSE_s": 1.3329837658236905,
+      "R2_log": 0.9675590635624418,
+      "train_MAE_s": 0.8811456304476555,
+      "train_R2_log": 0.9648910845073311,
+      "fit_sec": 2.0
+    },
+    {
+      "model": "ElasticNet",
+      "MAE_s": 0.9102806223509249,
+      "RMSE_s": 1.3423842871767762,
+      "R2_log": 0.9670957590802133,
+      "train_MAE_s": 0.8852739251123816,
+      "train_R2_log": 0.9651551842835809,
+      "fit_sec": 2.0
+    },
+    {
+      "model": "Ridge",
+      "MAE_s": 0.9290038939643777,
+      "RMSE_s": 1.3631578299317018,
+      "R2_log": 0.966052001330314,
+      "train_MAE_s": 0.8908692643135216,
+      "train_R2_log": 0.96540781077437,
+      "fit_sec": 0.8
+    },
+    {
+      "model": "LinearRegression",
+      "MAE_s": 0.9290211727350289,
+      "RMSE_s": 1.3631720717450946,
+      "R2_log": 0.9660516521274287,
+      "train_MAE_s": 0.8908765729491195,
+      "train_R2_log": 0.9654078132959218,
+      "fit_sec": 1.0
+    }
+  ],
+  "train_rows": 138217,
+  "test_rows": 70410
+}

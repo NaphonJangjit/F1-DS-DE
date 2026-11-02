@@ -1,0 +1,12 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+requests
+kmodes
+kneed
+# optional
+# lightgbm
+# xgboost
+# catboost
+# pyarrow   # สำหรับ .parquet
