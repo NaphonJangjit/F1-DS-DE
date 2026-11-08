@@ -52,7 +52,7 @@ WEATHER_MAP = {
 TYRE_COMPOUNDS = ["SOFT", "MEDIUM", "HARD", "INTERMEDIATE", "WET"]
 
 # นับรถคันอื่นที่อยู่ในระยะ gap ไม่เกิน threshold นี้ (วินาที)
-TRAFFIC_THRESHOLDS = (1.0, 2.0, 5.0)
+TRAFFIC_THRESHOLDS = (1.0, 1.5, 2.0, 5.0)
 
 
 def _traffic_col(s):

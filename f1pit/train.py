@@ -38,6 +38,27 @@ TEST_SIZE = 0.2
 
 CATEGORICAL_FEATURES = ["Tyre", "Track_Status"]
 
+# Prev_* trend features: rolling mean + slope (derivative) ย้อนหลัง PREV_TREND_WINDOW lap
+# (ใช้เฉพาะค่าจากแถวก่อนหน้า -> point-in-time ถูกต้อง)
+PREV_TREND_WINDOW = 5
+
+# Prev_* ที่เป็น "previous" ตาม sector เดียวกัน (ค่าจาก lap ก่อนหน้าใน sector นั้น)
+PREV_TREND_BASE = [
+    "Prev_Avg_Speed_Corners", "Prev_Avg_Speed_Straight", "Prev_Duration",
+    "Prev_Full_Throttle_Pct", "Prev_Brake_Pct", "Prev_DRS_Pct",
+    "Prev_Max_Speed", "Prev_Min_Speed", "Prev_Avg_Gear",
+    "Prev_I1_Speed", "Prev_I2_Speed", "Prev_St_Speed",
+]
+# Prev_Sector_Duration เป็นลำดับตามเวลา (ต่อเนื่องข้าม sector) -> group แยก
+PREV_SECTOR_SEQ = "Prev_Sector_Duration"
+
+
+def _trend_cols(base):
+    return [f"{base}_roll{PREV_TREND_WINDOW}_mean", f"{base}_roll{PREV_TREND_WINDOW}_slope"]
+
+
+PREV_TREND_COLUMNS = [c for b in [*PREV_TREND_BASE, PREV_SECTOR_SEQ] for c in _trend_cols(b)]
+
 NUMERIC_FEATURES = [
     "Tyre_Age", "Tyre_Age_Total", "Track_Status_Inferred",
     "Prev_Avg_Speed_Corners", "Prev_Avg_Speed_Straight", "Prev_Duration", "Prev_Sector_Duration",
@@ -52,6 +73,7 @@ NUMERIC_FEATURES = [
     # Track profile (Num_Corner_* ถูกตรวจจับอัตโนมัติ)
     "Total_Sector_Length", "Total_Straight_Length",
     "Total_Distance_Driven", "Distance_On_Tyre",
+    *PREV_TREND_COLUMNS,
 ]
 
 REQUIRED_COLS = ["Lap", "Sector", "Tyre", "Tyre_Age", "Prev_Avg_Speed_Corners", "Prev_Avg_Speed_Straight",
@@ -59,6 +81,9 @@ REQUIRED_COLS = ["Lap", "Sector", "Tyre", "Tyre_Age", "Prev_Avg_Speed_Corners", 
 
 # interaction compound × age: แทน one-hot ของ Tyre + ค่า Tyre_Age เดี่ยว ๆ
 TYRE_AGE_INTERACTION = [f"Tyre_Age_{c}" for c in TYRE_COMPOUNDS]
+
+# พจน์ quadratic ต่อ compound (จับยางเสื่อม non-linear) — คู่กับ Tyre_Age_<compound> เดิม
+TYRE_AGE_SQUARED = [f"Tyre_Age_{c}_2" for c in TYRE_COMPOUNDS]
 
 # Outlier removal: ตัด sector ที่ Duration สูงผิดปกติ (อุบัติเหตุ / collision / SC / ธงเหลือง)
 OUTLIER_K = 4.0          # Duration > median + OUTLIER_K * MAD -> outlier (ด้านช้า)
@@ -118,22 +143,96 @@ def corner_feature_columns(df):
 
 
 def add_tyre_age_interaction(df):
-    """เติมคอลัมน์ Tyre_Age_<compound> = Tyre_Age ถ้าอยู่บนยางนั้น, 0 ถ้าไม่ใช่ (ทุก compound รวม WET/INTER)
+    """เติม Tyre_Age_<compound> (linear) และ Tyre_Age_<compound>_2 (quadratic) ต่อ compound
 
-    แทน one-hot ของ Tyre + ค่า Tyre_Age เดี่ยว ๆ ด้วย interaction compound × age
+    interaction compound × age × Circuit_Total_Length: ยางเสื่อมคิดเป็น "ระยะทาง" ต่อ lap
+    (length × age) เพื่อเทียบข้ามสนามที่มีความยาว lap ต่างกันได้
+    - Tyre_Age_<compound>   = 1[compound] × Tyre_Age × Circuit_Total_Length
+    - Tyre_Age_<compound>_2 = 1[compound] × Tyre_Age² × Circuit_Total_Length
+    (แทน one-hot ของ Tyre + ค่า Tyre_Age เดี่ยว ๆ; ไม่มี Circuit_Total_Length -> length=1.0)
     """
     out = df.copy()
     if "Tyre" not in out.columns or "Tyre_Age" not in out.columns:
         for c in TYRE_COMPOUNDS:
             out[f"Tyre_Age_{c}"] = np.nan
+            out[f"Tyre_Age_{c}_2"] = np.nan
         return out
     tyre = out["Tyre"].fillna("").astype(str).str.upper().str.strip()
     age = pd.to_numeric(out["Tyre_Age"], errors="coerce")
     age_arr = age.to_numpy(dtype=float)
     ok_age = age.notna().to_numpy()
+
+    # circuit length (เมตร); ถ้าไม่มี / NaN / <=0 -> 1.0 (ไม่ scale)
+    if "Circuit_Total_Length" in out.columns:
+        length = pd.to_numeric(out["Circuit_Total_Length"], errors="coerce").to_numpy(dtype=float)
+    else:
+        length = np.ones(len(out), dtype=float)
+    length = np.where(np.isfinite(length) & (length > 0), length, 1.0)
+
+    scaled = age_arr * length            # age × length
+    scaled2 = age_arr ** 2 * length      # age² × length
+
     for c in TYRE_COMPOUNDS:
-        out[f"Tyre_Age_{c}"] = np.where((tyre.to_numpy() == c) & ok_age, age_arr, 0.0)
+        m = (tyre.to_numpy() == c) & ok_age
+        out[f"Tyre_Age_{c}"] = np.where(m, scaled, 0.0)
+        out[f"Tyre_Age_{c}_2"] = np.where(m, scaled2, 0.0)
     return out
+
+
+def _roll_slope(s, window):
+    """Slope (OLS) ของ window ล่าสุด ต่อแถว — vectorized ผ่าน shift ด้วย weight คงที่
+
+    x = 0..window-1 (เก่า -> ใหม่); slope = Σ (x - x̄) / Σ(x - x̄)² · y
+    แถวที่ยังมีข้อมูลใน window ไม่ครบ (shift เกินหัว) -> NaN
+    """
+    x = np.arange(window, dtype=float)
+    w = (x - x.mean()) / float(((x - x.mean()) ** 2).sum())
+    out = pd.Series(0.0, index=s.index, dtype=float)
+    for k in range(window):
+        out = out + w[k] * s.shift(window - 1 - k)
+    return out
+
+
+def add_prev_trend_features(df):
+    """เติม rolling mean + slope (แนวโน้ม / derivative) ของ Prev_* features ย้อนหลัง PREV_TREND_WINDOW lap
+
+    - PREV_TREND_BASE : group (Session_Key, Driver, Sector) เรียงตาม Lap (ค่าใน sector เดียวกัน)
+    - Prev_Sector_Duration : ลำดับตามเวลา (Lap, Sector) group (Session_Key, Driver)
+    ใช้เฉพาะค่าจากแถวก่อนหน้า (shift/rolling backward) -> point-in-time ถูกต้อง
+
+    คืน (df ใหม่, รายชื่อคอลัมน์ใหม่ที่เพิ่มจริง)
+    """
+    out = df.copy()
+    if not {"Session_Key", "Driver", "Lap", "Sector"}.issubset(out.columns):
+        return out, []
+    window = PREV_TREND_WINDOW
+    new_cols = []
+
+    def _apply(base, sorted_df, group_cols):
+        mean_col, slope_col = _trend_cols(base)
+        mean = pd.Series(np.nan, index=sorted_df.index, dtype=float)
+        slope = pd.Series(np.nan, index=sorted_df.index, dtype=float)
+        for _, g in sorted_df.groupby(group_cols, sort=False):
+            v = pd.to_numeric(g[base], errors="coerce")
+            mean.loc[g.index] = v.rolling(window, min_periods=1).mean().to_numpy()
+            slope.loc[g.index] = _roll_slope(v, window).to_numpy()
+        return mean.reindex(out.index), slope.reindex(out.index)
+
+    sector_sorted = out.sort_values(["Session_Key", "Driver", "Sector", "Lap"])
+    for base in PREV_TREND_BASE:
+        if base not in out.columns:
+            continue
+        mean_col, slope_col = _trend_cols(base)
+        out[mean_col], out[slope_col] = _apply(base, sector_sorted, ["Session_Key", "Driver", "Sector"])
+        new_cols += [mean_col, slope_col]
+
+    if PREV_SECTOR_SEQ in out.columns:
+        seq_sorted = out.sort_values(["Session_Key", "Driver", "Lap", "Sector"])
+        mean_col, slope_col = _trend_cols(PREV_SECTOR_SEQ)
+        out[mean_col], out[slope_col] = _apply(PREV_SECTOR_SEQ, seq_sorted, ["Session_Key", "Driver"])
+        new_cols += [mean_col, slope_col]
+
+    return out, new_cols
 
 
 def remove_duration_outliers(df, k=OUTLIER_K, mad_floor=OUTLIER_MAD_FLOOR):
@@ -176,6 +275,9 @@ def prepare_data(df, outlier_k=OUTLIER_K):
     notes = []
     df = df.copy()
 
+    # trend features (rolling mean/slope ของ Prev_*) — คำนวณบน raw history ก่อนตัด outlier
+    df, _ = add_prev_trend_features(df)
+
     # สร้าง Log_Duration จาก Duration ถ้ายังไม่มี (ไม่ log ซ้ำ)
     if TARGET not in df.columns:
         raw_col = next((c for c in ("Duration", "Outcome_Duration") if c in df.columns), None)
@@ -204,7 +306,9 @@ def prepare_data(df, outlier_k=OUTLIER_K):
     if absent:
         notes.append("Features not found and excluded: " + ", ".join(absent))
 
-    df_ml = df[list(dict.fromkeys(["Lap", "Sector", TARGET, *present]))].copy()
+    # Circuit_Total_Length เก็บไว้ใช้กับ interaction เท่านั้น (ไม่ใช่ feature เอง)
+    keep_extra = [c for c in ("Circuit_Total_Length",) if c in df.columns]
+    df_ml = df[list(dict.fromkeys(["Lap", "Sector", TARGET, *keep_extra, *present]))].copy()
 
     for col in CATEGORICAL_FEATURES:
         if col in df_ml.columns:
@@ -231,9 +335,10 @@ def prepare_data(df, outlier_k=OUTLIER_K):
         notes.append("Features with no usable values excluded: " + ", ".join(all_nan))
     features = [c for c in present if c not in all_nan]
 
-    # แทน Tyre (one-hot) + Tyre_Age (เดี่ยว) ด้วย interaction Tyre_Age_<compound>
+    # แทน Tyre (one-hot) + Tyre_Age (เดี่ยว) ด้วย interaction Tyre_Age_<compound> (+ quadratic)
     df_ml = add_tyre_age_interaction(df_ml)
-    features = [c for c in features if c not in ("Tyre", "Tyre_Age")] + TYRE_AGE_INTERACTION
+    features = ([c for c in features if c not in ("Tyre", "Tyre_Age")]
+                + TYRE_AGE_INTERACTION + TYRE_AGE_SQUARED)
     return df_ml, features, notes
 
 
@@ -344,6 +449,7 @@ class TrainResult:
         for col in CATEGORICAL_FEATURES:
             if col in X.columns:
                 X[col] = X[col].astype("string").str.upper().str.strip()
+        X, _ = add_prev_trend_features(X)
         X = add_tyre_age_interaction(X)
         for col in self.features:
             if col not in X.columns:

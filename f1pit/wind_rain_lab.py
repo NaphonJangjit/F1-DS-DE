@@ -31,9 +31,9 @@ from f1pit import config
 from f1pit.api import fetch, to_utc
 from f1pit.tracks import get_track_by_name, gp_layout, range_layer, sector_bounds
 from f1pit.train import (
-    TARGET, TEST_SIZE, NUMERIC_FEATURES, CATEGORICAL_FEATURES, TYRE_AGE_INTERACTION,
+    TARGET, TEST_SIZE, NUMERIC_FEATURES, CATEGORICAL_FEATURES, TYRE_AGE_INTERACTION, TYRE_AGE_SQUARED,
     REQUIRED_COLS, WEATHER_MAP, OUTLIER_K, _to_float,
-    add_tyre_age_interaction, corner_feature_columns, remove_duration_outliers,
+    add_tyre_age_interaction, add_prev_trend_features, corner_feature_columns, remove_duration_outliers,
 )
 from f1pit.feature_lab import _mae_s, _rmse_s, build_X
 
@@ -316,6 +316,7 @@ def _add_wind_rain(raw, corners):
 # ---------------------------------------------------------------------
 def _prepare_lab(raw, extra_cols):
     df = raw.copy()
+    df, _ = add_prev_trend_features(df)
     if TARGET not in df.columns:
         rawc = pd.to_numeric(df["Duration"], errors="coerce")
         df[TARGET] = np.log(rawc.where(rawc > 0))
@@ -331,7 +332,8 @@ def _prepare_lab(raw, extra_cols):
     present = [c for c in all_features if c in df.columns]
 
     keep = list(dict.fromkeys(["Session_Key", "Driver", "Lap", "Sector", "Time_Start",
-                               TARGET, *present, *extra_cols]))
+                               TARGET, "Circuit_Total_Length", *present, *extra_cols]))
+    keep = [c for c in keep if c in df.columns]
     df_ml = df[keep].copy()
 
     for col in CATEGORICAL_FEATURES:
@@ -357,7 +359,8 @@ def _prepare_lab(raw, extra_cols):
     all_nan = [c for c in present if df_ml[c].isna().all()]
     features = [c for c in present if c not in all_nan]
     df_ml = add_tyre_age_interaction(df_ml)
-    features = [c for c in features if c not in ("Tyre", "Tyre_Age")] + TYRE_AGE_INTERACTION
+    features = ([c for c in features if c not in ("Tyre", "Tyre_Age")]
+                + TYRE_AGE_INTERACTION + TYRE_AGE_SQUARED)
 
     extra_ok = [c for c in extra_cols if c in df_ml.columns and not df_ml[c].isna().all()]
     features = features + extra_ok

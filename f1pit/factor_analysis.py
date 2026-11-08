@@ -27,9 +27,12 @@ PACE_ANCHORS = ["Prev_Duration", "Prev_Sector_Duration", "Clean_Pace", "Best_Dur
 GROUPS = {
     "Fuel / Tyre deg": ["Lap", "Total_Distance_Driven", "Distance_On_Tyre", "Tyre_Age_Total",
                         "Pit_Stops_Done", "Tyre_Age_SOFT", "Tyre_Age_MEDIUM", "Tyre_Age_HARD",
-                        "Tyre_Age_INTERMEDIATE", "Tyre_Age_WET"],
+                        "Tyre_Age_INTERMEDIATE", "Tyre_Age_WET",
+                        "Tyre_Age_SOFT_2", "Tyre_Age_MEDIUM_2", "Tyre_Age_HARD_2",
+                        "Tyre_Age_INTERMEDIATE_2", "Tyre_Age_WET_2"],
     "Weather": ["Track_Temperature", "Air_Temperature", "Humidity", "Pressure", "Rainfall"],
-    "Traffic / Pit": ["Interval_Ahead", "Traffic_Within_1s", "Traffic_Within_2s", "Traffic_Within_5s",
+    "Traffic / Pit": ["Interval_Ahead", "Traffic_Within_1s", "Traffic_Within_1.5s",
+                      "Traffic_Within_2s", "Traffic_Within_5s",
                       "Will_Box", "Prev_Lap_Pitted", "Prev_Lap_Box_Duration"],
     "Track geometry": ["Total_Sector_Length", "Total_Straight_Length"],
     "Driving (speed/gear/DRS)": ["Prev_Avg_Speed_Corners", "Prev_Avg_Speed_Straight", "Prev_Max_Speed",
@@ -97,8 +100,8 @@ def main():
 
     print(f"\nInterpretable effects (raw units -> seconds, at {mean_dur:.1f}s mean sector):")
     for name in ["Lap", "Tyre_Age_Total", "Track_Temperature", "Air_Temperature",
-                 "Pressure", "Rainfall", "Traffic_Within_1s", "Traffic_Within_2s",
-                 "Traffic_Within_5s", "Total_Sector_Length", "Total_Straight_Length",
+                 "Pressure", "Rainfall", "Traffic_Within_1s", "Traffic_Within_1.5s",
+                 "Traffic_Within_2s", "Traffic_Within_5s", "Total_Sector_Length", "Total_Straight_Length",
                  "Prev_DRS_Pct", "Prev_Avg_Speed_Corners", "Prev_Avg_Speed_Straight"]:
         if name in raw_coef.index:
             c = raw_coef[name]
