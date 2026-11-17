@@ -76,7 +76,11 @@ FEATURE_COLUMNS = [
 ]
 
 # ผลลัพธ์ของ sector ปัจจุบัน -> ห้ามใช้เป็น feature (export ไว้วิเคราะห์ได้)
-OUTCOME_COLUMNS = ["Outcome_Time_End", "Outcome_Avg_Speed", "Outcome_Avg_Speed_Corners", "Outcome_Avg_Speed_Straight"]
+# ครบชุด telemetry ที่มี Prev_* counterpart (ดู TELEMETRY_HISTORY) — ใช้เป็น target
+# ของ forest-of-forests (predict current telemetry จาก Prev_* + tyre)
+OUTCOME_COLUMNS = ["Outcome_Time_End", "Outcome_Avg_Speed", "Outcome_Avg_Speed_Corners", "Outcome_Avg_Speed_Straight",
+                   "Outcome_Full_Throttle_Pct", "Outcome_Brake_Pct", "Outcome_DRS_Pct",
+                   "Outcome_Max_Speed", "Outcome_Min_Speed", "Outcome_Avg_Gear"]
 
 INTERVAL_FAR_DEFAULT = 60.0   # วินาที: "ไม่มีรถคันหน้าใกล้ ๆ"
 

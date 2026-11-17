@@ -1,0 +1,51 @@
+{
+  "results": [
+    {
+      "model": "RF baseline",
+      "full": 0.2649163659516992,
+      "green": 0.24390460120522972
+    },
+    {
+      "model": "SVR(rbf) top5 C=1.0 eps=0.1",
+      "full": 1.1906188510023128,
+      "green": 1.1748422906003966,
+      "n_sv": 91
+    },
+    {
+      "model": "SVR(rbf) top5 C=1.0 eps=0.02",
+      "full": 0.34496320438227474,
+      "green": 0.32301390420803316,
+      "n_sv": 494
+    },
+    {
+      "model": "SVR(rbf) top5 C=10.0 eps=0.1",
+      "full": 1.4606153931948156,
+      "green": 1.4448105223172445,
+      "n_sv": 104
+    },
+    {
+      "model": "SVR(rbf) top15 C=1.0 eps=0.1",
+      "full": 1.2104094526065137,
+      "green": 1.1830806568144434,
+      "n_sv": 129
+    },
+    {
+      "model": "SVR(rbf) full C=1.0 eps=0.1",
+      "full": 1.4626148413957893,
+      "green": 1.4162963106258644,
+      "n_sv": 360
+    },
+    {
+      "model": "LinearSVR(nystroem) top5",
+      "full": 1.094224090294363,
+      "green": 1.0769784455690825
+    },
+    {
+      "model": "LinearSVR(nystroem) full",
+      "full": 1.7167463253767519,
+      "green": 1.669376321552171
+    }
+  ],
+  "n_sub": 6000,
+  "features": 72
+}

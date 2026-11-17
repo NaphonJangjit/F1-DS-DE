@@ -1,0 +1,481 @@
+{
+  "races": [
+    {
+      "country": "United Kingdom",
+      "n": 1904,
+      "full_mae": 1.306968543340342,
+      "dry_mae": 0.9066581919935628,
+      "inter_mae": 1.4771603693620263,
+      "n_dry": 568,
+      "n_inter": 1336
+    },
+    {
+      "country": "Australia",
+      "n": 1886,
+      "full_mae": 0.9667354644397325,
+      "dry_mae": 1.2938534868192841,
+      "inter_mae": 0.8806287110605202,
+      "n_dry": 393,
+      "n_inter": 1493
+    },
+    {
+      "country": "Azerbaijan",
+      "n": 2602,
+      "full_mae": 0.4936424124285141,
+      "dry_mae": 0.4936424124285141,
+      "inter_mae": null,
+      "n_dry": 2602,
+      "n_inter": 0
+    },
+    {
+      "country": "Monaco",
+      "n": 3952,
+      "full_mae": 0.3234643446393271,
+      "dry_mae": 0.3234643446393271,
+      "inter_mae": null,
+      "n_dry": 3952,
+      "n_inter": 0
+    },
+    {
+      "country": "Belgium",
+      "n": 1892,
+      "full_mae": 0.30298479742259105,
+      "dry_mae": 0.30298479742259105,
+      "inter_mae": null,
+      "n_dry": 1892,
+      "n_inter": 0
+    },
+    {
+      "country": "Brazil",
+      "n": 3279,
+      "full_mae": 0.27362023179626066,
+      "dry_mae": 0.27362023179626066,
+      "inter_mae": null,
+      "n_dry": 3279,
+      "n_inter": 0
+    },
+    {
+      "country": "United States",
+      "n": 2416,
+      "full_mae": 0.24195940805380228,
+      "dry_mae": 0.24195940805380228,
+      "inter_mae": null,
+      "n_dry": 2416,
+      "n_inter": 0
+    },
+    {
+      "country": "Saudi Arabia",
+      "n": 2480,
+      "full_mae": 0.23053757333278535,
+      "dry_mae": 0.23053757333278535,
+      "inter_mae": null,
+      "n_dry": 2480,
+      "n_inter": 0
+    },
+    {
+      "country": "Canada",
+      "n": 3724,
+      "full_mae": 0.22329283658866353,
+      "dry_mae": 0.22329283658866353,
+      "inter_mae": null,
+      "n_dry": 3724,
+      "n_inter": 0
+    },
+    {
+      "country": "China",
+      "n": 3073,
+      "full_mae": 0.21742660812813455,
+      "dry_mae": 0.21742660812813455,
+      "inter_mae": null,
+      "n_dry": 3073,
+      "n_inter": 0
+    },
+    {
+      "country": "Japan",
+      "n": 3049,
+      "full_mae": 0.20589586615316688,
+      "dry_mae": 0.20589586615316688,
+      "inter_mae": null,
+      "n_dry": 3049,
+      "n_inter": 0
+    },
+    {
+      "country": "Netherlands",
+      "n": 3297,
+      "full_mae": 0.2052140194969645,
+      "dry_mae": 0.2052140194969645,
+      "inter_mae": null,
+      "n_dry": 3297,
+      "n_inter": 0
+    },
+    {
+      "country": "Singapore",
+      "n": 3537,
+      "full_mae": 0.2033073642805125,
+      "dry_mae": 0.2033073642805125,
+      "inter_mae": null,
+      "n_dry": 3537,
+      "n_inter": 0
+    },
+    {
+      "country": "Spain",
+      "n": 3204,
+      "full_mae": 0.19604672156390276,
+      "dry_mae": 0.19604672156390276,
+      "inter_mae": null,
+      "n_dry": 3204,
+      "n_inter": 0
+    },
+    {
+      "country": "Austria",
+      "n": 3149,
+      "full_mae": 0.17837813621812867,
+      "dry_mae": 0.17837813621812867,
+      "inter_mae": null,
+      "n_dry": 3149,
+      "n_inter": 0
+    },
+    {
+      "country": "Hungary",
+      "n": 3976,
+      "full_mae": 0.17542938805782837,
+      "dry_mae": 0.17542938805782837,
+      "inter_mae": null,
+      "n_dry": 3976,
+      "n_inter": 0
+    },
+    {
+      "country": "United States",
+      "n": 3015,
+      "full_mae": 0.17535133867693942,
+      "dry_mae": 0.17535133867693942,
+      "inter_mae": null,
+      "n_dry": 3015,
+      "n_inter": 0
+    },
+    {
+      "country": "Italy",
+      "n": 2991,
+      "full_mae": 0.17248165803225018,
+      "dry_mae": 0.17248165803225018,
+      "inter_mae": null,
+      "n_dry": 2991,
+      "n_inter": 0
+    },
+    {
+      "country": "Bahrain",
+      "n": 2973,
+      "full_mae": 0.1717915477981709,
+      "dry_mae": 0.1717915477981709,
+      "inter_mae": null,
+      "n_dry": 2973,
+      "n_inter": 0
+    },
+    {
+      "country": "United States",
+      "n": 1412,
+      "full_mae": 0.16955923867333955,
+      "dry_mae": 0.16955923867333955,
+      "inter_mae": null,
+      "n_dry": 1412,
+      "n_inter": 0
+    },
+    {
+      "country": "Mexico",
+      "n": 3594,
+      "full_mae": 0.16236401007245668,
+      "dry_mae": 0.16236401007245668,
+      "inter_mae": null,
+      "n_dry": 3594,
+      "n_inter": 0
+    },
+    {
+      "country": "United Arab Emirates",
+      "n": 3354,
+      "full_mae": 0.16175591484157592,
+      "dry_mae": 0.16175591484157592,
+      "inter_mae": null,
+      "n_dry": 3354,
+      "n_inter": 0
+    },
+    {
+      "country": "Qatar",
+      "n": 2867,
+      "full_mae": 0.15247564923551069,
+      "dry_mae": 0.15247564923551069,
+      "inter_mae": null,
+      "n_dry": 2867,
+      "n_inter": 0
+    },
+    {
+      "country": "Italy",
+      "n": 2784,
+      "full_mae": 0.13758219471114347,
+      "dry_mae": 0.13758219471114347,
+      "inter_mae": null,
+      "n_dry": 2784,
+      "n_inter": 0
+    }
+  ],
+  "shift_top": {
+    "DRY": [
+      {
+        "feature": "Humidity",
+        "cond": "DRY",
+        "ks": 0.1701101481044648,
+        "train_mean": 51.534229773315765,
+        "test_mean": 51.185984226335805,
+        "train_std": 13.38031066913355,
+        "test_std": 18.898253378755914
+      },
+      {
+        "feature": "Pressure",
+        "cond": "DRY",
+        "ks": 0.12261984337229381,
+        "train_mean": 986.6045730553159,
+        "test_mean": 985.8498838430919,
+        "train_std": 54.23440409896466,
+        "test_std": 55.00643439504076
+      },
+      {
+        "feature": "Track_Temperature",
+        "cond": "DRY",
+        "ks": 0.12158626047806487,
+        "train_mean": 36.03869985917413,
+        "test_mean": 35.732368565129256,
+        "train_std": 8.001194247512167,
+        "test_std": 9.697010544050256
+      },
+      {
+        "feature": "Prev_St_Speed",
+        "cond": "DRY",
+        "ks": 0.1144842586859472,
+        "train_mean": 301.75400899468497,
+        "test_mean": 304.1610158203963,
+        "train_std": 23.16874920750745,
+        "test_std": 24.210576615725557
+      },
+      {
+        "feature": "Prev_St_Speed_roll5_mean",
+        "cond": "DRY",
+        "ks": 0.10159324355451282,
+        "train_mean": 299.7055246394807,
+        "test_mean": 301.92667934468926,
+        "train_std": 21.338116725668673,
+        "test_std": 22.311104233583727
+      },
+      {
+        "feature": "Tyre_Age_HARD",
+        "cond": "DRY",
+        "ks": 0.09987831511722556,
+        "train_mean": 46602.785649389,
+        "test_mean": 39791.900386203226,
+        "train_std": 59307.43544466518,
+        "test_std": 58378.52665336076
+      },
+      {
+        "feature": "Tyre_Age_HARD_2",
+        "cond": "DRY",
+        "ks": 0.09987831511722556,
+        "train_mean": 1129978.5892957193,
+        "test_mean": 983120.5329604475,
+        "train_std": 2159010.617775915,
+        "test_std": 2000045.0447452657
+      },
+      {
+        "feature": "Air_Temperature",
+        "cond": "DRY",
+        "ks": 0.09796350095195405,
+        "train_mean": 24.265775526582775,
+        "test_mean": 24.086326038383568,
+        "train_std": 4.567885484922402,
+        "test_std": 4.568997392541676
+      },
+      {
+        "feature": "Track_Status_Inferred",
+        "cond": "DRY",
+        "ks": 0.09523417570916803,
+        "train_mean": 0.3524508245127879,
+        "test_mean": 0.4476850002219559,
+        "train_std": 0.4777334411709566,
+        "test_std": 0.497255609116904
+      },
+      {
+        "feature": "Pit_Stops_Done",
+        "cond": "DRY",
+        "ks": 0.0927325650477202,
+        "train_mean": 1.0197534790048304,
+        "test_mean": 0.8913452005741259,
+        "train_std": 0.9665409876155006,
+        "test_std": 0.780425464507169
+      },
+      {
+        "feature": "Prev_I2_Speed",
+        "cond": "DRY",
+        "ks": 0.0845819270035611,
+        "train_mean": 250.11173700389165,
+        "test_mean": 255.73416711424844,
+        "train_std": 42.85918822356145,
+        "test_std": 40.8786711599493
+      },
+      {
+        "feature": "Prev_I2_Speed_roll5_mean",
+        "cond": "DRY",
+        "ks": 0.0787013787986609,
+        "train_mean": 248.5303113816583,
+        "test_mean": 253.95171999283866,
+        "train_std": 42.266447234111254,
+        "test_std": 41.11435023121497
+      }
+    ],
+    "INTER": [
+      {
+        "feature": "Track_Status_Inferred",
+        "cond": "INTER",
+        "ks": 0.623541887592789,
+        "train_mean": 0.3333333333333333,
+        "test_mean": 0.9568752209261223,
+        "train_std": 0.47140452079103173,
+        "test_std": 0.20313796421079675
+      },
+      {
+        "feature": "Total_Sector_Length",
+        "cond": "INTER",
+        "ks": 0.6139832594780896,
+        "train_mean": 1455.335443591006,
+        "test_mean": 1856.609101237186,
+        "train_std": 357.721251099471,
+        "test_std": 345.1666754245878
+      },
+      {
+        "feature": "Track_Temperature",
+        "cond": "INTER",
+        "ks": 0.6043297778042324,
+        "train_mean": 24.13981618250451,
+        "test_mean": 21.08720395899611,
+        "train_std": 2.3369326039543763,
+        "test_std": 2.168045903830329
+      },
+      {
+        "feature": "Prev_Avg_Speed_Corners",
+        "cond": "INTER",
+        "ks": 0.6007826027781824,
+        "train_mean": 137.5023932504703,
+        "test_mean": 159.1830826703294,
+        "train_std": 15.802353768748414,
+        "test_std": 21.384834845576698
+      },
+      {
+        "feature": "Prev_Avg_Speed_Corners_roll5_mean",
+        "cond": "INTER",
+        "ks": 0.5630613437982045,
+        "train_mean": 136.2441091392812,
+        "test_mean": 155.867135462194,
+        "train_std": 14.18780809524644,
+        "test_std": 19.807300950360652
+      },
+      {
+        "feature": "Total_Straight_Length",
+        "cond": "INTER",
+        "ks": 0.5283111767602167,
+        "train_mean": 741.3586762415885,
+        "test_mean": 1019.7048192011312,
+        "train_std": 336.938574442061,
+        "test_std": 166.99689952932457
+      },
+      {
+        "feature": "Prev_Sector_Duration_roll5_mean",
+        "cond": "INTER",
+        "ks": 0.5038941302006945,
+        "train_mean": 29.849267533781937,
+        "test_mean": 34.30477365382349,
+        "train_std": 3.4867552462390665,
+        "test_std": 5.115199968547251
+      },
+      {
+        "feature": "Air_Temperature",
+        "cond": "INTER",
+        "ks": 0.49236829148202854,
+        "train_mean": 19.141358936484487,
+        "test_mean": 16.877271120537294,
+        "train_std": 2.543297720208272,
+        "test_std": 1.2379769659426245
+      },
+      {
+        "feature": "Pressure",
+        "cond": "INTER",
+        "ks": 0.490164208045009,
+        "train_mean": 965.9210897751518,
+        "test_mean": 1000.0996818663839,
+        "train_std": 36.63334428721326,
+        "test_std": 10.673070437344128
+      },
+      {
+        "feature": "Prev_I2_Speed",
+        "cond": "INTER",
+        "ks": 0.48815835984446804,
+        "train_mean": 238.7106515673724,
+        "test_mean": 264.384588193708,
+        "train_std": 32.77813075343121,
+        "test_std": 43.67169837109848
+      },
+      {
+        "feature": "Pit_Stops_Done",
+        "cond": "INTER",
+        "ks": 0.4522391444452625,
+        "train_mean": 0.9742327260791072,
+        "test_mean": 2.229409685401202,
+        "train_std": 1.3632148009272047,
+        "test_std": 1.4789811815962868
+      },
+      {
+        "feature": "Prev_I2_Speed_roll5_mean",
+        "cond": "INTER",
+        "ks": 0.37038574418882714,
+        "train_mean": 233.7811094698835,
+        "test_mean": 254.6273948391658,
+        "train_std": 33.087893000972315,
+        "test_std": 42.548244286573166
+      }
+    ]
+  },
+  "residual": {
+    "DRY": {
+      "n": 67581,
+      "mean_bias": 0.012771967442544835,
+      "std": 0.4887135278275522,
+      "median": -0.0133321456049309,
+      "p5": -0.4068943250366033,
+      "p95": 0.532639863715751,
+      "frac_underpredicted": 0.46976221127239903,
+      "frac_overpredicted": 0.530237788727601,
+      "mae": 0.2273493497814196,
+      "rmse": 0.48888038970079895
+    },
+    "INTER": {
+      "n": 2829,
+      "mean_bias": 0.9509354785356362,
+      "std": 1.959905049389393,
+      "median": 0.294497180775668,
+      "p5": -0.44246081766629713,
+      "p95": 5.334380057928249,
+      "frac_underpredicted": 0.7589254153411099,
+      "frac_overpredicted": 0.24107458465889006,
+      "mae": 1.162341788293045,
+      "rmse": 2.178418253449011
+    }
+  },
+  "within_race": {
+    "race": "Australia",
+    "dry": {
+      "n": 393,
+      "mae": 1.2938534868192841,
+      "mean_bias": 0.7750445076036625
+    },
+    "inter": {
+      "n": 1493,
+      "mae": 0.8806287110605202,
+      "mean_bias": 0.7081624944271538
+    }
+  }
+}

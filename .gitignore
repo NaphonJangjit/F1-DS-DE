@@ -3,3 +3,5 @@ __pycache__/
 *.pkl
 model_report.html
 *.parquet
+*.log
+top_errors_2025.csv

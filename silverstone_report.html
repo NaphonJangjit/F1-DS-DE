@@ -1,0 +1,156 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Silverstone Lap-Sector Error</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7f9; --surface:#ffffff; --fg:#1c1f24; --muted:#5c626d;
+    --border:#e4e7ec; --accent:#e26b1a; --wet:#3f6fb0; --drying:#e08a1e; --dry:#b8bfc9;
+    --cell-empty:#eceff3;
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#131519; --surface:#1a1d22; --fg:#e8eaee; --muted:#9aa2ad;
+    --border:#2a2e36; --accent:#f0843a; --wet:#5f8fd0; --drying:#eda13d; --dry:#6a7280;
+    --cell-empty:#23272e; color-scheme:dark;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#131519; --surface:#1a1d22; --fg:#e8eaee; --muted:#9aa2ad;
+    --border:#2a2e36; --accent:#f0843a; --wet:#5f8fd0; --drying:#eda13d; --dry:#6a7280;
+    --cell-empty:#23272e; color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       padding-left:max(16px,env(safe-area-inset-left,0px));
+       padding-right:max(16px,env(safe-area-inset-right,0px));
+       padding-block:32px 48px;}
+  .wrap{max-width:1080px;margin:0 auto;display:grid;gap:20px}
+  h1{font-size:1.45rem;font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+  .sub{color:var(--muted);font-size:.95rem;margin:2px 0 0}
+  .stats{display:flex;flex-wrap:wrap;gap:10px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+        padding:10px 14px;min-width:120px}
+  .stat b{display:block;font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
+  .stat span{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.82rem;color:var(--muted)}
+  .legend .sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  .grad{height:11px;width:130px;border-radius:3px;background:linear-gradient(90deg,hsl(18,85%,93%),hsl(18,85%,33%))}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+  .scroll{overflow-x:auto}
+  .grid{display:grid;grid-template-columns:26px repeat(var(--nl),16px);gap:2px;align-items:center}
+  .grid .ylab{font-size:.7rem;color:var(--muted);text-align:right;padding-right:6px;font-weight:600}
+  .grid .cell{width:16px;height:22px;border-radius:2px}
+  .condgrid{display:grid;grid-template-columns:26px repeat(var(--nl),16px);gap:2px;align-items:center;margin-bottom:6px}
+  .condgrid .cell{width:16px;height:6px;border-radius:2px}
+  .xlab{grid-column:2 / -1;display:grid;grid-template-columns:repeat(var(--nl),16px);gap:2px;margin-top:4px}
+  .xlab span{font-size:.62rem;color:var(--muted);text-align:center;transform:translateX(-1px)}
+  .tooltip{position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;
+           padding:8px 10px;font-size:.78rem;pointer-events:none;z-index:5;box-shadow:0 4px 16px rgba(0,0,0,.12);display:none}
+  .phases{display:grid;gap:6px;font-size:.85rem}
+  .phases .row{display:grid;grid-template-columns:76px 1fr auto;gap:12px;padding:6px 0;border-bottom:1px solid var(--border)}
+  .phases .row:last-child{border-bottom:0}
+  .phases .range{font-weight:600;font-variant-numeric:tabular-nums}
+  .phases .desc{color:var(--muted)}
+  .phases .mae{font-weight:600;font-variant-numeric:tabular-nums}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Silverstone 2025 — per lap &times; sector error</h1>
+    <p class="sub">Condition-aware-anchor model, frozen RF (2023+24 &rarr; 2025). Each cell is the mean absolute error (seconds) of one lap-sector across all drivers.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b>1.319 s</b><span>overall MAE</span></div>
+    <div class="stat"><b id="st-worst">—</b><span>worst cell</span></div>
+    <div class="stat"><b id="st-best">—</b><span>best cell</span></div>
+    <div class="stat"><b>51</b><span>laps</span></div>
+    <div class="stat"><b>3</b><span>sectors</span></div>
+  </div>
+
+  <div class="legend">
+    <span><i class="sw" style="background:var(--wet)"></i>Wet (rain falling)</span>
+    <span><i class="sw" style="background:var(--drying)"></i>Drying (dry flag, still on inters)</span>
+    <span><i class="sw" style="background:var(--dry)"></i>Dry</span>
+    <span style="margin-left:6px">MAE scale:</span>
+    <span class="grad"></span>
+    <span>0 s</span><span style="opacity:.7">&rarr; 10 s</span>
+  </div>
+
+  <div class="card">
+    <div class="scroll">
+      <div class="condgrid" id="condgrid"></div>
+      <div class="grid" id="heatmap"></div>
+      <div class="xlab" id="xlabs"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">Race phases</div>
+    <div class="phases">
+      <div class="row"><span class="range">L2&ndash;10</span><span class="desc">Wet start, mixed tyres, field spread out</span><span class="mae">0.5&ndash;9.0 s</span></div>
+      <div class="row"><span class="range">L11&ndash;15</span><span class="desc">Rain falling, everyone on inters</span><span class="mae">1.0&ndash;5.9 s</span></div>
+      <div class="row"><span class="range">L18&ndash;24</span><span class="desc">Drying track &mdash; the hardest phase</span><span class="mae">0.2&ndash;9.8 s</span></div>
+      <div class="row"><span class="range">L25&ndash;37</span><span class="desc">Stable inters &mdash; model nails it</span><span class="mae">0.09&ndash;1.2 s</span></div>
+      <div class="row"><span class="range">L38&ndash;45</span><span class="desc">Inter &rarr; dry tyre switch</span><span class="mae">0.1&ndash;7.8 s</span></div>
+      <div class="row"><span class="range">L46&ndash;52</span><span class="desc">Full dry &mdash; model nails it</span><span class="mae">0.13&ndash;0.65 s</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="tip"></div>
+
+<script>
+const DATA = {"laps": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52], "sectors": [1, 2, 3], "lapCond": {"2": "DRYING", "3": "DRYING", "4": "DRYING", "5": "DRYING", "6": "DRYING", "7": "DRYING", "8": "DRYING", "9": "DRYING", "10": "DRYING", "11": "WET", "12": "WET", "13": "WET", "14": "WET", "15": "WET", "18": "DRYING", "20": "DRYING", "22": "DRYING", "23": "DRYING", "24": "DRYING", "25": "DRYING", "26": "DRYING", "27": "DRYING", "28": "DRYING", "29": "DRYING", "30": "DRYING", "31": "DRYING", "32": "DRYING", "33": "DRYING", "34": "DRYING", "35": "DRYING", "36": "DRYING", "37": "DRYING", "38": "DRYING", "39": "DRYING", "40": "DRYING", "41": "DRYING", "42": "DRY", "43": "DRY", "44": "DRY", "45": "DRY", "46": "DRY", "47": "DRY", "48": "DRY", "49": "DRY", "50": "DRY", "51": "DRY", "52": "DRY"}, "cells": {"2,2": {"mae": 7.7496904310743515, "cond": "DRYING", "n": 16}, "2,3": {"mae": 3.8474707256382104, "cond": "DRYING", "n": 13}, "3,2": {"mae": 8.730903849017785, "cond": "DRYING", "n": 18}, "3,3": {"mae": 5.000060172505235, "cond": "DRYING", "n": 9}, "4,1": {"mae": 1.9436641315156624, "cond": "DRYING", "n": 17}, "4,2": {"mae": 0.9725069870791894, "cond": "DRYING", "n": 17}, "4,3": {"mae": 1.0544975446531417, "cond": "DRYING", "n": 17}, "5,1": {"mae": 4.297320989127394, "cond": "DRYING", "n": 17}, "5,2": {"mae": 2.320937442451818, "cond": "DRYING", "n": 17}, "5,3": {"mae": 4.13889113009843, "cond": "DRYING", "n": 12}, "6,3": {"mae": 3.6343683917114897, "cond": "DRYING", "n": 12}, "7,1": {"mae": 5.009263089294958, "cond": "DRY", "n": 2}, "7,2": {"mae": 5.818947017870043, "cond": "DRYING", "n": 17}, "7,3": {"mae": 0.7451560779886812, "cond": "DRYING", "n": 17}, "8,1": {"mae": 0.508366191280271, "cond": "DRYING", "n": 17}, "8,2": {"mae": 1.0197791328441994, "cond": "DRYING", "n": 17}, "8,3": {"mae": 0.5266548056965952, "cond": "DRYING", "n": 17}, "9,1": {"mae": 0.5584302891558997, "cond": "DRYING", "n": 17}, "9,2": {"mae": 1.2340547603427026, "cond": "DRYING", "n": 17}, "9,3": {"mae": 1.1809374866899485, "cond": "DRYING", "n": 17}, "10,1": {"mae": 0.4686908936386317, "cond": "DRYING", "n": 15}, "10,2": {"mae": 2.6257354387027445, "cond": "DRYING", "n": 17}, "10,3": {"mae": 1.3138209124358229, "cond": "DRYING", "n": 17}, "11,1": {"mae": 0.9473651808211088, "cond": "DRYING", "n": 12}, "11,2": {"mae": 4.785358766931918, "cond": "WET", "n": 17}, "11,3": {"mae": 1.5745603025789723, "cond": "WET", "n": 17}, "12,1": {"mae": 1.3541973324813215, "cond": "WET", "n": 9}, "12,2": {"mae": 2.218594804750096, "cond": "WET", "n": 17}, "12,3": {"mae": 1.0058991793549763, "cond": "WET", "n": 17}, "13,1": {"mae": 1.0686103780489393, "cond": "WET", "n": 16}, "13,2": {"mae": 5.100878556646674, "cond": "WET", "n": 17}, "13,3": {"mae": 3.5898403433035453, "cond": "WET", "n": 10}, "14,3": {"mae": 5.8784506385107145, "cond": "WET", "n": 11}, "15,1": {"mae": 3.480042989251203, "cond": "WET", "n": 1}, "18,1": {"mae": 4.335355379874519, "cond": "DRYING", "n": 16}, "18,2": {"mae": 9.814930261660683, "cond": "DRYING", "n": 14}, "18,3": {"mae": 5.380435680228548, "cond": "DRYING", "n": 1}, "20,3": {"mae": 7.574479972161665, "cond": "DRYING", "n": 1}, "22,1": {"mae": 3.467764392397851, "cond": "DRYING", "n": 16}, "22,2": {"mae": 7.607543100210954, "cond": "DRYING", "n": 16}, "22,3": {"mae": 1.106555017621815, "cond": "DRYING", "n": 16}, "23,1": {"mae": 1.1537762038317423, "cond": "DRYING", "n": 16}, "23,2": {"mae": 4.038755299094275, "cond": "DRYING", "n": 16}, "23,3": {"mae": 0.4224951827328831, "cond": "DRYING", "n": 16}, "24,1": {"mae": 0.19479658080965406, "cond": "DRYING", "n": 15}, "24,2": {"mae": 2.441957362873966, "cond": "DRYING", "n": 15}, "24,3": {"mae": 0.3366917113365337, "cond": "DRYING", "n": 15}, "25,1": {"mae": 0.1603099778781993, "cond": "DRYING", "n": 15}, "25,2": {"mae": 1.837663380545321, "cond": "DRYING", "n": 15}, "25,3": {"mae": 0.23934861232016189, "cond": "DRYING", "n": 15}, "26,1": {"mae": 0.1617606234643811, "cond": "DRYING", "n": 15}, "26,2": {"mae": 1.4446157586076809, "cond": "DRYING", "n": 15}, "26,3": {"mae": 0.1643426137699708, "cond": "DRYING", "n": 15}, "27,1": {"mae": 0.15311160227837536, "cond": "DRYING", "n": 15}, "27,2": {"mae": 0.7899378389229473, "cond": "DRYING", "n": 15}, "27,3": {"mae": 0.288124659393192, "cond": "DRYING", "n": 15}, "28,1": {"mae": 0.1760680054691207, "cond": "DRYING", "n": 15}, "28,2": {"mae": 1.0094260589247932, "cond": "DRYING", "n": 15}, "28,3": {"mae": 0.43377838203847074, "cond": "DRYING", "n": 15}, "29,1": {"mae": 0.20009935119138308, "cond": "DRYING", "n": 15}, "29,2": {"mae": 1.0499696225747859, "cond": "DRYING", "n": 15}, "29,3": {"mae": 0.3752069996879657, "cond": "DRYING", "n": 15}, "30,1": {"mae": 0.29547878653504966, "cond": "DRYING", "n": 15}, "30,2": {"mae": 1.0599317671298172, "cond": "DRYING", "n": 15}, "30,3": {"mae": 0.25503790066927884, "cond": "DRYING", "n": 15}, "31,1": {"mae": 0.13969586919524843, "cond": "DRYING", "n": 15}, "31,2": {"mae": 1.17772612423987, "cond": "DRYING", "n": 15}, "31,3": {"mae": 0.24804630784788936, "cond": "DRYING", "n": 15}, "32,1": {"mae": 0.16890840541456573, "cond": "DRYING", "n": 15}, "32,2": {"mae": 1.097602502333163, "cond": "DRYING", "n": 15}, "32,3": {"mae": 0.1502067876636661, "cond": "DRYING", "n": 15}, "33,1": {"mae": 0.08537646664273472, "cond": "DRYING", "n": 14}, "33,2": {"mae": 0.955101610126419, "cond": "DRYING", "n": 14}, "33,3": {"mae": 0.23974795053147094, "cond": "DRYING", "n": 14}, "34,1": {"mae": 0.10368683369314624, "cond": "DRYING", "n": 15}, "34,2": {"mae": 0.9976050154854842, "cond": "DRYING", "n": 15}, "34,3": {"mae": 0.374153572712104, "cond": "DRYING", "n": 15}, "35,1": {"mae": 0.2914729039410157, "cond": "DRYING", "n": 15}, "35,2": {"mae": 0.7708239956659734, "cond": "DRYING", "n": 15}, "35,3": {"mae": 0.24256845008831765, "cond": "DRYING", "n": 15}, "36,1": {"mae": 0.20743065869595537, "cond": "DRYING", "n": 15}, "36,2": {"mae": 0.4783152748324156, "cond": "DRYING", "n": 15}, "36,3": {"mae": 0.20246138739487282, "cond": "DRYING", "n": 15}, "37,1": {"mae": 0.09024131501996517, "cond": "DRYING", "n": 15}, "37,2": {"mae": 0.4708386585873242, "cond": "DRYING", "n": 15}, "37,3": {"mae": 0.33397460882563007, "cond": "DRYING", "n": 15}, "38,1": {"mae": 0.1378199767538685, "cond": "DRYING", "n": 14}, "38,2": {"mae": 1.1086992556994384, "cond": "DRYING", "n": 15}, "38,3": {"mae": 0.4816017812878916, "cond": "DRYING", "n": 15}, "39,1": {"mae": 0.39626512793371405, "cond": "DRYING", "n": 14}, "39,2": {"mae": 1.3456142258435018, "cond": "DRYING", "n": 15}, "39,3": {"mae": 0.5472767528373339, "cond": "DRYING", "n": 15}, "40,1": {"mae": 0.3247297744890979, "cond": "DRYING", "n": 15}, "40,2": {"mae": 0.8011115314717069, "cond": "DRYING", "n": 15}, "40,3": {"mae": 0.1473589136382349, "cond": "DRYING", "n": 15}, "41,1": {"mae": 0.2559261065441196, "cond": "DRYING", "n": 15}, "41,2": {"mae": 0.6139284861776854, "cond": "DRYING", "n": 15}, "41,3": {"mae": 0.860451597286035, "cond": "DRYING", "n": 15}, "42,1": {"mae": 0.6692909097240411, "cond": "DRYING", "n": 8}, "42,2": {"mae": 1.3438360703010968, "cond": "DRY", "n": 15}, "42,3": {"mae": 1.1945736188276492, "cond": "DRY", "n": 15}, "43,1": {"mae": 0.46572084769622535, "cond": "DRY", "n": 11}, "43,2": {"mae": 1.9835240805605114, "cond": "DRY", "n": 15}, "43,3": {"mae": 1.020000081605056, "cond": "DRY", "n": 14}, "44,1": {"mae": 0.8289086715230469, "cond": "DRY", "n": 14}, "44,2": {"mae": 0.7531685183455219, "cond": "DRY", "n": 15}, "44,3": {"mae": 0.5872016928983942, "cond": "DRY", "n": 15}, "45,1": {"mae": 0.7377551965166196, "cond": "DRY", "n": 14}, "45,2": {"mae": 0.5651632617377861, "cond": "DRY", "n": 15}, "45,3": {"mae": 0.4963400324976483, "cond": "DRY", "n": 15}, "46,1": {"mae": 0.5475287092836837, "cond": "DRY", "n": 15}, "46,2": {"mae": 0.5977218677454696, "cond": "DRY", "n": 15}, "46,3": {"mae": 0.37782544436121246, "cond": "DRY", "n": 15}, "47,1": {"mae": 0.47058354353824633, "cond": "DRY", "n": 15}, "47,2": {"mae": 0.5152330827487314, "cond": "DRY", "n": 15}, "47,3": {"mae": 0.27023725477341454, "cond": "DRY", "n": 15}, "48,1": {"mae": 0.3011628462044939, "cond": "DRY", "n": 15}, "48,2": {"mae": 0.3085906513962077, "cond": "DRY", "n": 15}, "48,3": {"mae": 0.3852330175484544, "cond": "DRY", "n": 15}, "49,1": {"mae": 0.21081216519740736, "cond": "DRY", "n": 15}, "49,2": {"mae": 0.35520388048964074, "cond": "DRY", "n": 15}, "49,3": {"mae": 0.2537660593975076, "cond": "DRY", "n": 15}, "50,1": {"mae": 0.18733312455848175, "cond": "DRY", "n": 15}, "50,2": {"mae": 0.20104440553003494, "cond": "DRY", "n": 15}, "50,3": {"mae": 0.21105959592851395, "cond": "DRY", "n": 15}, "51,1": {"mae": 0.1629089044504892, "cond": "DRY", "n": 15}, "51,2": {"mae": 0.2530922636777689, "cond": "DRY", "n": 15}, "51,3": {"mae": 0.12658684969013975, "cond": "DRY", "n": 15}, "52,1": {"mae": 0.14313962172432435, "cond": "DRY", "n": 13}, "52,2": {"mae": 0.6453387202188703, "cond": "DRY", "n": 13}, "52,3": {"mae": 0.2789005980427912, "cond": "DRY", "n": 13}}};
+const LAPS = DATA.laps, SECTORS = DATA.sectors;
+document.documentElement.style.setProperty('--nl', LAPS.length);
+
+const COND = {WET:'var(--wet)', DRYING:'var(--drying)', DRY:'var(--dry)'};
+function maeColor(mae){
+  if(mae==null) return 'var(--cell-empty)';
+  const t = Math.min(1, mae/10);
+  return `hsl(18,85%,${93 - t*58}%)`;
+}
+
+// condition strip (per lap)
+const cg = document.getElementById('condgrid');
+cg.innerHTML = '<span class="ylab">cond</span>' + LAPS.map(l=>{
+  const c = DATA.lapCond[l] || 'DRY';
+  return `<div class="cell" title="Lap ${l}: ${c}" style="background:${COND[c]}"></div>`;
+}).join('');
+
+// heatmap
+const hm = document.getElementById('heatmap');
+let worst = {v:0, key:''}, best = {v:Infinity, key:''};
+hm.innerHTML = SECTORS.map(s=>{
+  const cells = LAPS.map(l=>{
+    const k = l+','+s;
+    const c = DATA.cells[k];
+    const mae = c ? c.mae : null;
+    if(mae!=null){ if(mae>worst.v) worst={v:mae,key:k}; if(mae<best.v) best={v:mae,key:k}; }
+    const tip = c ? `Lap ${l} &middot; Sector ${s} &middot; ${c.cond} &middot; MAE ${c.mae.toFixed(3)} s (n=${c.n})` : `Lap ${l} &middot; Sector ${s} &middot; no data`;
+    return `<div class="cell" data-k="${k}" data-tip="${tip}" style="background:${maeColor(mae)}"></div>`;
+  }).join('');
+  return `<span class="ylab">S${s}</span>` + cells;
+}).join('');
+
+// x labels (every 5 laps)
+const xl = document.getElementById('xlabs');
+xl.innerHTML = LAPS.map(l=>`<span>${l%5===0?l:''}</span>`).join('');
+
+document.getElementById('st-worst').textContent = worst.v.toFixed(3)+' s';
+document.getElementById('st-best').textContent = best.v.toFixed(3)+' s';
+
+// hover tooltip
+const tip = document.getElementById('tip');
+hm.addEventListener('mouseover', e=>{
+  const c = e.target.closest('.cell'); if(!c) return;
+  const t = c.dataset.tip; if(!t) return;
+  tip.innerHTML = t; tip.style.display='block';
+});
+hm.addEventListener('mousemove', e=>{
+  tip.style.left = (e.clientX+12)+'px'; tip.style.top = (e.clientY+12)+'px';
+});
+hm.addEventListener('mouseout', e=>{ if(e.target.closest('.cell')) tip.style.display='none'; });
+</script>

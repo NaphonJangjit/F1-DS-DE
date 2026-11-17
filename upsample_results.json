@@ -1,0 +1,222 @@
+{
+  "summary": [
+    {
+      "model": "RandomForest",
+      "variant": "base",
+      "mae": 0.2649163659516992,
+      "rmse": 0.6481285091628394,
+      "mae_wet": 1.1788261560572402,
+      "mae_sc": 1.9976467875917923,
+      "mae_vsc": 3.8669110819286345,
+      "mae_clean": 0.24165813463467045
+    },
+    {
+      "model": "RandomForest",
+      "variant": "upsample",
+      "mae": 0.26491578758233536,
+      "rmse": 0.6360464550122079,
+      "mae_wet": 1.1919351653962038,
+      "mae_sc": 1.9356223502365077,
+      "mae_vsc": 3.965896515480899,
+      "mae_clean": 0.2414785962655482
+    },
+    {
+      "model": "LinearRegression",
+      "variant": "base",
+      "mae": 0.918496900296818,
+      "rmse": 1.3341895809763107,
+      "mae_wet": 1.4126067474190476,
+      "mae_sc": 2.80452428633586,
+      "mae_vsc": 2.433978778576854,
+      "mae_clean": 0.9044194030747096
+    },
+    {
+      "model": "LinearRegression",
+      "variant": "upsample",
+      "mae": 0.9485730349056485,
+      "rmse": 1.3587033944192302,
+      "mae_wet": 1.3535525608622925,
+      "mae_sc": 2.600933406390979,
+      "mae_vsc": 2.49324958673022,
+      "mae_clean": 0.9362562823787665
+    },
+    {
+      "model": "Ridge",
+      "variant": "base",
+      "mae": 0.9184793801199165,
+      "rmse": 1.3341973569725822,
+      "mae_wet": 1.412600987908018,
+      "mae_sc": 2.8045469506318406,
+      "mae_vsc": 2.4344263196884945,
+      "mae_clean": 0.9044004810220815
+    },
+    {
+      "model": "Ridge",
+      "variant": "upsample",
+      "mae": 0.9485737754253843,
+      "rmse": 1.3587367560932997,
+      "mae_wet": 1.353574240492585,
+      "mae_sc": 2.6009690553796907,
+      "mae_vsc": 2.493580976538566,
+      "mae_clean": 0.9362558634567256
+    }
+  ],
+  "multipliers": {
+    "wet": 3.181058688147296,
+    "sc": 2.386755309963737,
+    "vsc": 43.0582554517134
+  },
+  "eff_shares": {
+    "wet": 10.49010654297208,
+    "sc": 9.254492862516704,
+    "vsc": 3.957283660947101
+  },
+  "target_share": 0.1,
+  "cap": 20.0,
+  "race_compare": [
+    {
+      "country": "United Kingdom",
+      "rows": 1904,
+      "base": 1.3069685433403422,
+      "upsample": 1.315933538477767
+    },
+    {
+      "country": "Australia",
+      "rows": 1886,
+      "base": 0.9667354644397336,
+      "upsample": 0.9574937845139014
+    },
+    {
+      "country": "Azerbaijan",
+      "rows": 2602,
+      "base": 0.49364241242851453,
+      "upsample": 0.34719665956180235
+    },
+    {
+      "country": "Monaco",
+      "rows": 3952,
+      "base": 0.3234643446393268,
+      "upsample": 0.33578196017169065
+    },
+    {
+      "country": "Belgium",
+      "rows": 1892,
+      "base": 0.30298479742259027,
+      "upsample": 0.28653869051319464
+    },
+    {
+      "country": "Brazil",
+      "rows": 3279,
+      "base": 0.27362023179626027,
+      "upsample": 0.35501576465357776
+    },
+    {
+      "country": "United States",
+      "rows": 2416,
+      "base": 0.24195940805380176,
+      "upsample": 0.17569518528241657
+    },
+    {
+      "country": "Saudi Arabia",
+      "rows": 2480,
+      "base": 0.23053757333278535,
+      "upsample": 0.22375785537000678
+    },
+    {
+      "country": "Canada",
+      "rows": 3724,
+      "base": 0.223292836588663,
+      "upsample": 0.20146032381933401
+    },
+    {
+      "country": "China",
+      "rows": 3073,
+      "base": 0.21742660812813508,
+      "upsample": 0.2238737713902208
+    },
+    {
+      "country": "Japan",
+      "rows": 3049,
+      "base": 0.20589586615316688,
+      "upsample": 0.2836037721153829
+    },
+    {
+      "country": "Netherlands",
+      "rows": 3297,
+      "base": 0.20521401949696463,
+      "upsample": 0.20846073312317662
+    },
+    {
+      "country": "Singapore",
+      "rows": 3537,
+      "base": 0.20330736428051255,
+      "upsample": 0.2088498471079706
+    },
+    {
+      "country": "Spain",
+      "rows": 3204,
+      "base": 0.19604672156390288,
+      "upsample": 0.1936436042885071
+    },
+    {
+      "country": "Austria",
+      "rows": 3149,
+      "base": 0.17837813621812854,
+      "upsample": 0.18244261209800405
+    },
+    {
+      "country": "Hungary",
+      "rows": 3976,
+      "base": 0.1754293880578282,
+      "upsample": 0.1706836725929004
+    },
+    {
+      "country": "United States",
+      "rows": 3015,
+      "base": 0.17535133867693928,
+      "upsample": 0.17112957555891936
+    },
+    {
+      "country": "Italy",
+      "rows": 2991,
+      "base": 0.17248165803225018,
+      "upsample": 0.17786629419598488
+    },
+    {
+      "country": "Bahrain",
+      "rows": 2973,
+      "base": 0.17179154779817077,
+      "upsample": 0.17396807001628808
+    },
+    {
+      "country": "United States",
+      "rows": 1412,
+      "base": 0.16955923867333964,
+      "upsample": 0.17021988146361092
+    },
+    {
+      "country": "Mexico",
+      "rows": 3594,
+      "base": 0.16236401007245688,
+      "upsample": 0.16384488725359564
+    },
+    {
+      "country": "United Arab Emirates",
+      "rows": 3354,
+      "base": 0.1617559148415759,
+      "upsample": 0.1719896373224557
+    },
+    {
+      "country": "Qatar",
+      "rows": 2867,
+      "base": 0.15247564923551046,
+      "upsample": 0.15477372801387876
+    },
+    {
+      "country": "Italy",
+      "rows": 2784,
+      "base": 0.1375821947111433,
+      "upsample": 0.14650006966573503
+    }
+  ]
+}

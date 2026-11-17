@@ -1,0 +1,232 @@
+{
+  "cores": 6,
+  "n_estimators": 150,
+  "max_features": 0.3,
+  "unlearn_keep": 20000,
+  "features": 72,
+  "warm_rows": 138217,
+  "test_rows": 70410,
+  "static_mae": 0.26491636595169915,
+  "static_rmse": 0.6481285091628392,
+  "adaptive_mae": 0.26491636595169943,
+  "adaptive_rmse": 0.6481285091628394,
+  "retrains": 0,
+  "races": [
+    {
+      "i": 0,
+      "session_key": 9693,
+      "country": "Australia",
+      "rows": 1886,
+      "static_mae": 0.9667354644397335,
+      "adaptive_mae": 0.9667354644397336,
+      "drift": false
+    },
+    {
+      "i": 1,
+      "session_key": 9998,
+      "country": "China",
+      "rows": 3073,
+      "static_mae": 0.2174266081281341,
+      "adaptive_mae": 0.2174266081281364,
+      "drift": false
+    },
+    {
+      "i": 2,
+      "session_key": 10006,
+      "country": "Japan",
+      "rows": 3049,
+      "static_mae": 0.20589586615316732,
+      "adaptive_mae": 0.2058958661531676,
+      "drift": false
+    },
+    {
+      "i": 3,
+      "session_key": 10014,
+      "country": "Bahrain",
+      "rows": 2973,
+      "static_mae": 0.17179154779817105,
+      "adaptive_mae": 0.17179154779817066,
+      "drift": false
+    },
+    {
+      "i": 4,
+      "session_key": 10022,
+      "country": "Saudi Arabia",
+      "rows": 2480,
+      "static_mae": 0.23053757333278543,
+      "adaptive_mae": 0.2305375733327858,
+      "drift": false
+    },
+    {
+      "i": 5,
+      "session_key": 10033,
+      "country": "United States",
+      "rows": 1412,
+      "static_mae": 0.1695592386733389,
+      "adaptive_mae": 0.1695592386733401,
+      "drift": false
+    },
+    {
+      "i": 6,
+      "session_key": 9987,
+      "country": "Italy",
+      "rows": 2991,
+      "static_mae": 0.17248165803225007,
+      "adaptive_mae": 0.17248165803225013,
+      "drift": false
+    },
+    {
+      "i": 7,
+      "session_key": 9979,
+      "country": "Monaco",
+      "rows": 3952,
+      "static_mae": 0.3234643446393268,
+      "adaptive_mae": 0.32346434463932666,
+      "drift": false
+    },
+    {
+      "i": 8,
+      "session_key": 9971,
+      "country": "Spain",
+      "rows": 3204,
+      "static_mae": 0.19604672156390282,
+      "adaptive_mae": 0.19604672156390257,
+      "drift": false
+    },
+    {
+      "i": 9,
+      "session_key": 9963,
+      "country": "Canada",
+      "rows": 3724,
+      "static_mae": 0.22329283658866309,
+      "adaptive_mae": 0.22329283658866342,
+      "drift": false
+    },
+    {
+      "i": 10,
+      "session_key": 9955,
+      "country": "Austria",
+      "rows": 3149,
+      "static_mae": 0.1783781362181284,
+      "adaptive_mae": 0.17837813621812865,
+      "drift": false
+    },
+    {
+      "i": 11,
+      "session_key": 9947,
+      "country": "United Kingdom",
+      "rows": 1904,
+      "static_mae": 1.306968543340342,
+      "adaptive_mae": 1.306968543340342,
+      "drift": false
+    },
+    {
+      "i": 12,
+      "session_key": 9939,
+      "country": "Belgium",
+      "rows": 1892,
+      "static_mae": 0.3029847974225906,
+      "adaptive_mae": 0.30298479742259155,
+      "drift": false
+    },
+    {
+      "i": 13,
+      "session_key": 9928,
+      "country": "Hungary",
+      "rows": 3976,
+      "static_mae": 0.17542938805782823,
+      "adaptive_mae": 0.17542938805782798,
+      "drift": false
+    },
+    {
+      "i": 14,
+      "session_key": 9920,
+      "country": "Netherlands",
+      "rows": 3297,
+      "static_mae": 0.20521401949696463,
+      "adaptive_mae": 0.20521401949696458,
+      "drift": false
+    },
+    {
+      "i": 15,
+      "session_key": 9912,
+      "country": "Italy",
+      "rows": 2784,
+      "static_mae": 0.13758219471114325,
+      "adaptive_mae": 0.13758219471114355,
+      "drift": false
+    },
+    {
+      "i": 16,
+      "session_key": 9904,
+      "country": "Azerbaijan",
+      "rows": 2602,
+      "static_mae": 0.4936424124285147,
+      "adaptive_mae": 0.4936424124285156,
+      "drift": false
+    },
+    {
+      "i": 17,
+      "session_key": 9896,
+      "country": "Singapore",
+      "rows": 3537,
+      "static_mae": 0.2033073642805125,
+      "adaptive_mae": 0.20330736428051266,
+      "drift": false
+    },
+    {
+      "i": 18,
+      "session_key": 9888,
+      "country": "United States",
+      "rows": 3015,
+      "static_mae": 0.1753513386769389,
+      "adaptive_mae": 0.17535133867694036,
+      "drift": false
+    },
+    {
+      "i": 19,
+      "session_key": 9877,
+      "country": "Mexico",
+      "rows": 3594,
+      "static_mae": 0.16236401007245688,
+      "adaptive_mae": 0.16236401007245688,
+      "drift": false
+    },
+    {
+      "i": 20,
+      "session_key": 9869,
+      "country": "Brazil",
+      "rows": 3279,
+      "static_mae": 0.2736202317962601,
+      "adaptive_mae": 0.2736202317962609,
+      "drift": false
+    },
+    {
+      "i": 21,
+      "session_key": 9858,
+      "country": "United States",
+      "rows": 2416,
+      "static_mae": 0.2419594080538021,
+      "adaptive_mae": 0.24195940805380217,
+      "drift": false
+    },
+    {
+      "i": 22,
+      "session_key": 9850,
+      "country": "Qatar",
+      "rows": 2867,
+      "static_mae": 0.15247564923551063,
+      "adaptive_mae": 0.1524756492355105,
+      "drift": false
+    },
+    {
+      "i": 23,
+      "session_key": 9839,
+      "country": "United Arab Emirates",
+      "rows": 3354,
+      "static_mae": 0.16175591484157564,
+      "adaptive_mae": 0.16175591484157648,
+      "drift": false
+    }
+  ]
+}
