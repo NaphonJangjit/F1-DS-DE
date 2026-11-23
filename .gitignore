@@ -5,3 +5,4 @@ model_report.html
 *.parquet
 *.log
 top_errors_2025.csv
+online/

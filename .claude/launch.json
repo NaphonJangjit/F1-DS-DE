@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "f1-ai",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-3.14", "_web_api.py", "--host", "0.0.0.0", "--port", "8000"],
+      "port": 8000
+    },
+    {
+      "name": "f1-web",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-3.14", "-m", "http.server", "5500", "--bind", "0.0.0.0", "--directory", "D:\\Works\\F1 web"],
+      "port": 5500
+    }
+  ]
+}

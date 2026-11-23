@@ -1,0 +1,694 @@
+{
+ "family": "online (river): SGD / ARF / kNN, predict-then-learn every 10 laps",
+ "warm_up": "2023",
+ "stream": "2024-2026",
+ "champion": "v003",
+ "champion_model": "SGD",
+ "lineage": [
+  {
+   "version": "v001",
+   "model": "SGD",
+   "algorithm": "Linear SGD, Huber loss (river)",
+   "since": "2024 (after the 2023 warm-up)",
+   "reason": "best online model on 2024-2025 (MAE 0.300 s)"
+  },
+  {
+   "version": "v002",
+   "model": "kNN",
+   "algorithm": "kNN, k=15, last 2,000 sectors (numpy, = river kNN)",
+   "since": "after 2026 Catalunya",
+   "reason": "feature drift: dMAE -0.029 s, guardrail ok"
+  },
+  {
+   "version": "v003",
+   "model": "SGD",
+   "algorithm": "Linear SGD, Huber loss (river)",
+   "since": "after 2026 Silverstone",
+   "reason": "feature drift: dMAE -0.031 s, guardrail ok"
+  }
+ ],
+ "live_mae_sim": 0.3239,
+ "live_mae_all": 0.3115,
+ "sessions": [
+  {
+   "session_key": 9472,
+   "year": 2024,
+   "country": "Bahrain",
+   "circuit": "Sakhir",
+   "date": "2024-03-02",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9480,
+   "year": 2024,
+   "country": "Saudi Arabia",
+   "circuit": "Jeddah",
+   "date": "2024-03-09",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9488,
+   "year": 2024,
+   "country": "Australia",
+   "circuit": "Melbourne",
+   "date": "2024-03-24",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9496,
+   "year": 2024,
+   "country": "Japan",
+   "circuit": "Suzuka",
+   "date": "2024-04-07",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9507,
+   "year": 2024,
+   "country": "United States",
+   "circuit": "Miami",
+   "date": "2024-05-05",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9515,
+   "year": 2024,
+   "country": "Italy",
+   "circuit": "Imola",
+   "date": "2024-05-19",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9523,
+   "year": 2024,
+   "country": "Monaco",
+   "circuit": "Monte Carlo",
+   "date": "2024-05-26",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9531,
+   "year": 2024,
+   "country": "Canada",
+   "circuit": "Montreal",
+   "date": "2024-06-09",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9539,
+   "year": 2024,
+   "country": "Spain",
+   "circuit": "Catalunya",
+   "date": "2024-06-23",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9550,
+   "year": 2024,
+   "country": "Austria",
+   "circuit": "Spielberg",
+   "date": "2024-06-30",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9558,
+   "year": 2024,
+   "country": "United Kingdom",
+   "circuit": "Silverstone",
+   "date": "2024-07-07",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9566,
+   "year": 2024,
+   "country": "Hungary",
+   "circuit": "Hungaroring",
+   "date": "2024-07-21",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9574,
+   "year": 2024,
+   "country": "Belgium",
+   "circuit": "Spa-Francorchamps",
+   "date": "2024-07-28",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9582,
+   "year": 2024,
+   "country": "Netherlands",
+   "circuit": "Zandvoort",
+   "date": "2024-08-25",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9590,
+   "year": 2024,
+   "country": "Italy",
+   "circuit": "Monza",
+   "date": "2024-09-01",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9598,
+   "year": 2024,
+   "country": "Azerbaijan",
+   "circuit": "Baku",
+   "date": "2024-09-15",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9606,
+   "year": 2024,
+   "country": "Singapore",
+   "circuit": "Singapore",
+   "date": "2024-09-22",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9617,
+   "year": 2024,
+   "country": "United States",
+   "circuit": "Austin",
+   "date": "2024-10-20",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9625,
+   "year": 2024,
+   "country": "Mexico",
+   "circuit": "Mexico City",
+   "date": "2024-10-27",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9636,
+   "year": 2024,
+   "country": "Brazil",
+   "circuit": "Interlagos",
+   "date": "2024-11-03",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9644,
+   "year": 2024,
+   "country": "United States",
+   "circuit": "Las Vegas",
+   "date": "2024-11-24",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9655,
+   "year": 2024,
+   "country": "Qatar",
+   "circuit": "Lusail",
+   "date": "2024-12-01",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9662,
+   "year": 2024,
+   "country": "United Arab Emirates",
+   "circuit": "Yas Marina Circuit",
+   "date": "2024-12-08",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9673,
+   "year": 2024,
+   "country": "China",
+   "circuit": "Shanghai",
+   "date": "2024-04-21",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9693,
+   "year": 2025,
+   "country": "Australia",
+   "circuit": "Melbourne",
+   "date": "2025-03-16",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9839,
+   "year": 2025,
+   "country": "United Arab Emirates",
+   "circuit": "Yas Marina Circuit",
+   "date": "2025-12-07",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 9850,
+   "year": 2025,
+   "country": "Qatar",
+   "circuit": "Lusail",
+   "date": "2025-11-30",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 9858,
+   "year": 2025,
+   "country": "United States",
+   "circuit": "Las Vegas",
+   "date": "2025-11-23",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 9869,
+   "year": 2025,
+   "country": "Brazil",
+   "circuit": "Interlagos",
+   "date": "2025-11-09",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9877,
+   "year": 2025,
+   "country": "Mexico",
+   "circuit": "Mexico City",
+   "date": "2025-10-26",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9888,
+   "year": 2025,
+   "country": "United States",
+   "circuit": "Austin",
+   "date": "2025-10-19",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9896,
+   "year": 2025,
+   "country": "Singapore",
+   "circuit": "Singapore",
+   "date": "2025-10-05",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9904,
+   "year": 2025,
+   "country": "Azerbaijan",
+   "circuit": "Baku",
+   "date": "2025-09-21",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9912,
+   "year": 2025,
+   "country": "Italy",
+   "circuit": "Monza",
+   "date": "2025-09-07",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9920,
+   "year": 2025,
+   "country": "Netherlands",
+   "circuit": "Zandvoort",
+   "date": "2025-08-31",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9928,
+   "year": 2025,
+   "country": "Hungary",
+   "circuit": "Hungaroring",
+   "date": "2025-08-03",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9939,
+   "year": 2025,
+   "country": "Belgium",
+   "circuit": "Spa-Francorchamps",
+   "date": "2025-07-27",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9947,
+   "year": 2025,
+   "country": "United Kingdom",
+   "circuit": "Silverstone",
+   "date": "2025-07-06",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9955,
+   "year": 2025,
+   "country": "Austria",
+   "circuit": "Spielberg",
+   "date": "2025-06-29",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9963,
+   "year": 2025,
+   "country": "Canada",
+   "circuit": "Montreal",
+   "date": "2025-06-15",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9971,
+   "year": 2025,
+   "country": "Spain",
+   "circuit": "Catalunya",
+   "date": "2025-06-01",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9979,
+   "year": 2025,
+   "country": "Monaco",
+   "circuit": "Monte Carlo",
+   "date": "2025-05-25",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9987,
+   "year": 2025,
+   "country": "Italy",
+   "circuit": "Imola",
+   "date": "2025-05-18",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 9998,
+   "year": 2025,
+   "country": "China",
+   "circuit": "Shanghai",
+   "date": "2025-03-23",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 10006,
+   "year": 2025,
+   "country": "Japan",
+   "circuit": "Suzuka",
+   "date": "2025-04-06",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 10014,
+   "year": 2025,
+   "country": "Bahrain",
+   "circuit": "Sakhir",
+   "date": "2025-04-13",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 10022,
+   "year": 2025,
+   "country": "Saudi Arabia",
+   "circuit": "Jeddah",
+   "date": "2025-04-20",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 10033,
+   "year": 2025,
+   "country": "United States",
+   "circuit": "Miami",
+   "date": "2025-05-04",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": false
+  },
+  {
+   "session_key": 11234,
+   "year": 2026,
+   "country": "Australia",
+   "circuit": "Melbourne",
+   "date": "2026-03-08",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11245,
+   "year": 2026,
+   "country": "China",
+   "circuit": "Shanghai",
+   "date": "2026-03-15",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11253,
+   "year": 2026,
+   "country": "Japan",
+   "circuit": "Suzuka",
+   "date": "2026-03-29",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11280,
+   "year": 2026,
+   "country": "United States",
+   "circuit": "Miami",
+   "date": "2026-05-03",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11291,
+   "year": 2026,
+   "country": "Canada",
+   "circuit": "Montreal",
+   "date": "2026-05-24",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11299,
+   "year": 2026,
+   "country": "Monaco",
+   "circuit": "Monte Carlo",
+   "date": "2026-06-07",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11307,
+   "year": 2026,
+   "country": "Spain",
+   "circuit": "Catalunya",
+   "date": "2026-06-14",
+   "model": "SGD",
+   "version": "v001",
+   "simulated": true
+  },
+  {
+   "session_key": 11315,
+   "year": 2026,
+   "country": "Austria",
+   "circuit": "Spielberg",
+   "date": "2026-06-28",
+   "model": "kNN",
+   "version": "v002",
+   "simulated": true
+  },
+  {
+   "session_key": 11326,
+   "year": 2026,
+   "country": "United Kingdom",
+   "circuit": "Silverstone",
+   "date": "2026-07-05",
+   "model": "kNN",
+   "version": "v002",
+   "simulated": true
+  },
+  {
+   "session_key": 11334,
+   "year": 2026,
+   "country": "Belgium",
+   "circuit": "Spa-Francorchamps",
+   "date": "2026-07-19",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11342,
+   "year": 2026,
+   "country": "Hungary",
+   "circuit": "Hungaroring",
+   "date": "2026-07-26",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11353,
+   "year": 2026,
+   "country": "Netherlands",
+   "circuit": "Zandvoort",
+   "date": "2026-08-23",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11361,
+   "year": 2026,
+   "country": "Italy",
+   "circuit": "Monza",
+   "date": "2026-09-06",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11377,
+   "year": 2026,
+   "country": "Azerbaijan",
+   "circuit": "Baku",
+   "date": "2026-09-26",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11388,
+   "year": 2026,
+   "country": "Singapore",
+   "circuit": "Singapore",
+   "date": "2026-10-11",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11396,
+   "year": 2026,
+   "country": "United States",
+   "circuit": "Austin",
+   "date": "2026-10-25",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11404,
+   "year": 2026,
+   "country": "Mexico",
+   "circuit": "Mexico City",
+   "date": "2026-11-01",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  },
+  {
+   "session_key": 11412,
+   "year": 2026,
+   "country": "Brazil",
+   "circuit": "Interlagos",
+   "date": "2026-11-08",
+   "model": "SGD",
+   "version": "v003",
+   "simulated": true
+  }
+ ]
+}

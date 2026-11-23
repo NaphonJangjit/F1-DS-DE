@@ -1,0 +1,92 @@
+{
+  "years": [
+    2024,
+    2025
+  ],
+  "anova": {
+    "question": "Do SOFT / MEDIUM / HARD degrade at the same rate (% lap time per lap)?",
+    "groups": {
+      "SOFT": {
+        "n": 227,
+        "mean": 0.0369,
+        "sd": 0.0962,
+        "ci95": [
+          0.0243,
+          0.0495
+        ]
+      },
+      "MEDIUM": {
+        "n": 802,
+        "mean": 0.0008,
+        "sd": 0.0952,
+        "ci95": [
+          -0.0058,
+          0.0074
+        ]
+      },
+      "HARD": {
+        "n": 811,
+        "mean": -0.0061,
+        "sd": 0.07,
+        "ci95": [
+          -0.011,
+          -0.0013
+        ]
+      }
+    },
+    "F": 22.838117065805147,
+    "p": 1.5952707748299738e-10,
+    "eta_squared": 0.02426133251354213,
+    "levene_p": 3.8458762674171625e-09,
+    "alexander_govern_p": 7.878813544637825e-09,
+    "kruskal_p": 5.422821192220746e-13,
+    "tukey": {
+      "SOFT-MEDIUM": {
+        "diff": 0.0361,
+        "p": 5.8872336894388866e-08
+      },
+      "SOFT-HARD": {
+        "diff": 0.043,
+        "p": 6.889866455139781e-11
+      },
+      "MEDIUM-HARD": {
+        "diff": 0.0069,
+        "p": 0.23210607318671317
+      }
+    },
+    "decision_alpha_0.05": "reject H0"
+  },
+  "chi_square": {
+    "question": "Is pitting independent of SC/VSC?",
+    "table": {
+      "no pit": {
+        "Green lap": 47512,
+        "SC/VSC lap": 2549
+      },
+      "pitted": {
+        "Green lap": 1220,
+        "SC/VSC lap": 338
+      }
+    },
+    "expected": {
+      "no pit": {
+        "Green lap": 47261.1,
+        "SC/VSC lap": 2799.9
+      },
+      "pitted": {
+        "Green lap": 1470.9,
+        "SC/VSC lap": 87.1
+      }
+    },
+    "chi2": 785.6690336227437,
+    "dof": 1,
+    "p": 7.04540995630919e-173,
+    "cramers_v": 0.12337155101643321,
+    "pit_rate_pct": {
+      "Green lap": 2.5,
+      "SC/VSC lap": 11.71
+    },
+    "odds_ratio": 5.164048903780975,
+    "decision_alpha_0.05": "reject H0"
+  }
+}

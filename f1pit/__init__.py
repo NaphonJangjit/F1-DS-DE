@@ -21,7 +21,8 @@ from .circuits import create_circuit_db
 from .clustering import ClusterResult, cluster_corners
 from .context import TrackContext, add_track_profile, build_track_context
 from .dataset import build_dataset, list_drivers, list_sessions, load_df, save_df
-from .features import build_sector_table
+from .features import build_sector_table, repair_track_status
+from .pace_context import add_pace_context, add_relative_pace
 from .tracks import get_best_race_lap_track, get_track_by_name, load_tracks
 from .train import TrainResult, prepare_data, train_models
 
@@ -30,7 +31,8 @@ __all__ = [
     "load_tracks", "get_track_by_name", "get_best_race_lap_track",
     "create_circuit_db", "cluster_corners", "ClusterResult",
     "TrackContext", "build_track_context", "add_track_profile",
-    "build_sector_table", "build_dataset", "list_sessions", "list_drivers", "save_df", "load_df",
+    "build_sector_table", "repair_track_status", "add_pace_context", "add_relative_pace",
+    "build_dataset", "list_sessions", "list_drivers", "save_df", "load_df",
     "prepare_data", "train_models", "TrainResult", "write_report", "reload",
 ]
 
@@ -51,7 +53,7 @@ def reload():
     import sys
 
     order = ["api", "tracks", "circuits", "clustering", "context",
-             "features", "dataset", "train", "report", "plotting"]
+             "features", "pace_context", "dataset", "train", "report", "plotting"]
     for name in order:
         mod = sys.modules.get(f"{__name__}.{name}")
         if mod is not None:

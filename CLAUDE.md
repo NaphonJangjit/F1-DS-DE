@@ -57,6 +57,8 @@ These are the non-obvious rules that shape the code and are easy to break:
 - **Countries with multiple circuits** (USA, Italy, etc.): name-based session lookup may silently pick the wrong one. `resolve_session()` warns and returns the first; callers should pass `session_key=` to disambiguate.
 - **Track↔corner matching** uses the `Track_Slug` column (added during the refactor) first, with name/`aka` fallback for legacy data — not fuzzy matching.
 - **`create_circuit_db()` skips incomplete meetings** with a warning instead of aborting the whole year (a past bug returned `[], []` and dropped all data).
+- **`Num_Corner_*` is not comparable across years.** Corner clusters are fitted per year (9/11/8 clusters for 2023/2024/2025), so `Num_Corner_k` means a different corner type each year — don't use it in models trained on one year and tested on another.
+- **Red flags and Track_Status.** `SC/VSC DEPLOYED → RED FLAG → standing restart` sends no SC-ending message; the parser treats `RED FLAG` as a reset. Parquet built before that fix has SC stuck to the end of the race (2023 Brazil/Mexico…); repair with `_repair_status.py` / `repair_track_status()`.
 - **`ClusterResult`/`TrackContext` pickles are class-bound**: after changing a class and calling `f.reload()`, previously-created objects still use the old class. Rebuild or reload them.
 
 ## Interactive development

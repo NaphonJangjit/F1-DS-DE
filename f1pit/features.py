@@ -157,6 +157,10 @@ def _classify_message(message, flag, scope):
         return "SC_DEPLOYED"
     if "SAFETY CAR IN THIS LAP" in message:
         return "SC_ENDING"
+    # RED FLAG หยุดการแข่ง แล้วเริ่มใหม่ (standing start) โดยไม่มีข้อความ "SAFETY CAR IN THIS LAP"
+    # ถ้าไม่ reset ตรงนี้ สถานะ SC จะค้างไปจนจบเรซ (เช่น Brazil/Mexico 2023)
+    if flag == "RED" and scope == "TRACK":
+        return "RED_FLAG"
     explicit_green = message in {"GREEN FLAG", "GREEN FLAG SHOWN", "GREEN FLAG AT START"}
     green_track = flag == "GREEN" and scope == "TRACK" and "PIT EXIT" not in message
     return "GREEN" if (explicit_green or green_track) else None
@@ -202,7 +206,9 @@ def track_status_at(events, available, sector_start, sector_lap):
         sc_ending_lap = ev["lap_number"] if t == "SC_ENDING" else None
         vsc_ending_time = ev["date"] if t == "VSC_ENDING" else None
         status = {"SC_DEPLOYED": "SC", "SC_ENDING": "SC_ENDING", "VSC_DEPLOYED": "VSC",
-                  "VSC_ENDING": "VSC_ENDING", "GREEN": "GREEN"}[t]
+                  "VSC_ENDING": "VSC_ENDING", "GREEN": "GREEN", "RED_FLAG": "GREEN"}[t]
+        if t == "RED_FLAG":
+            inferred = True   # SC/VSC ก่อน red flag สิ้นสุดลงเมื่อเรซเริ่มใหม่
 
     # SC_ENDING ไม่ควรค้างข้าม lap
     if (status == "SC_ENDING" and sc_ending_lap is not None
@@ -213,6 +219,43 @@ def track_status_at(events, available, sector_start, sector_lap):
             and sector_start >= vsc_ending_time + pd.Timedelta(seconds=15)):
         status, inferred = "GREEN", True
     return status, inferred
+
+
+def repair_track_status(df, fetch_fn=fetch):
+    """คำนวณ Track_Status / Track_Status_Inferred ใหม่ให้ตารางที่ build ไว้แล้ว (ไม่ต้อง rebuild ทั้งปี)
+
+    ใช้ parser ปัจจุบัน (เช่น fix RED FLAG) กับ race_control ของแต่ละ session (1 request/session)
+    lap_starts ของแต่ละ driver = Time_Start ของ sector 1 ในตารางเอง (= laps.date_start ตอน build)
+    ใช้เฉพาะ event ก่อน Time_Start -> point-in-time เหมือนตอน build
+
+    หมายเหตุ: feature ที่ derive จาก Track_Status ตอน build (Clean_Pace ใช้ "lap สะอาด") ไม่ถูกคำนวณใหม่
+    คืน (df ใหม่, จำนวนแถวที่สถานะเปลี่ยน)
+    """
+    out = df.copy()
+    status = out["Track_Status"].astype("string").to_numpy(dtype=object).copy()
+    inferred = pd.to_numeric(out["Track_Status_Inferred"], errors="coerce").to_numpy(float).copy()
+    t_start = to_utc(out["Time_Start"])
+    for sk, g in out.groupby("Session_Key", sort=False):
+        rc = fetch_fn("race_control", session_key=int(sk))
+        if _empty(rc):
+            continue
+        for _, gd in g.groupby("Driver", sort=False):
+            s1 = gd[gd["Sector"] == 1]
+            lap_starts = (pd.DataFrame({"lap_number": s1["Lap"].astype(int).to_numpy(),
+                                        "date_start": t_start.loc[s1.index].to_numpy()})
+                          .sort_values("date_start"))
+            if lap_starts.empty:
+                continue
+            events = extract_control_events(rc, lap_starts)
+            for idx in gd.index:
+                st, inf = track_status_at(events, True, t_start.loc[idx], gd.at[idx, "Lap"])
+                status[out.index.get_loc(idx)] = st
+                inferred[out.index.get_loc(idx)] = float(inf)
+    changed = int((pd.Series(status, index=out.index).astype("string")
+                   != out["Track_Status"].astype("string")).fillna(True).sum())
+    out["Track_Status"] = status
+    out["Track_Status_Inferred"] = inferred
+    return out, changed
 
 
 # ---------------------------------------------------------------------

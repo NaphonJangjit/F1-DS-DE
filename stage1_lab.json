@@ -1,0 +1,1479 @@
+{
+ "rules": {
+  "psi_trigger": 0.25,
+  "score_trigger": 1.25,
+  "cooldown": 2,
+  "promote_margin": 0.02,
+  "guardrail": 0.01
+ },
+ "score": "mean over channels of MAE / MAE of 'same as last lap' on 2023 (1.0 = no better than repeating the previous lap, lower is better)",
+ "lineage": [
+  {
+   "version": "v001",
+   "model": "SGD online",
+   "since": "2023 race 1",
+   "reason": "same starting champion as stage 2 (SGD); every learner starts empty"
+  },
+  {
+   "version": "v002",
+   "model": "ARF online",
+   "since": "after 2023 Jeddah",
+   "reason": "feature drift: score -0.331"
+  },
+  {
+   "version": "v003",
+   "model": "kNN online",
+   "since": "after 2023 Baku",
+   "reason": "feature drift: score -0.273"
+  },
+  {
+   "version": "v004",
+   "model": "ARF online",
+   "since": "after 2023 Spa-Francorchamps",
+   "reason": "feature drift: score -0.076"
+  },
+  {
+   "version": "v005",
+   "model": "kNN online",
+   "since": "after 2023 Monza",
+   "reason": "feature drift: score -0.239"
+  },
+  {
+   "version": "v006",
+   "model": "SGD online",
+   "since": "after 2024 Melbourne",
+   "reason": "feature drift: score -0.026"
+  },
+  {
+   "version": "v007",
+   "model": "kNN online",
+   "since": "after 2024 Shanghai",
+   "reason": "feature drift: score -0.075"
+  },
+  {
+   "version": "v008",
+   "model": "ARF online",
+   "since": "after 2024 Imola",
+   "reason": "feature drift: score -0.098"
+  },
+  {
+   "version": "v009",
+   "model": "SGD online",
+   "since": "after 2024 Spa-Francorchamps",
+   "reason": "feature drift: score -0.090"
+  }
+ ],
+ "score_by_year": {
+  "2023": {
+   "SGD online": 36.564813523570024,
+   "ARF online": 1.181070612055346,
+   "kNN online": 1.1070520319998896,
+   "same as last lap": 1.0000000000000322,
+   "served": 1.1582058745707626
+  },
+  "2024": {
+   "SGD online": 1.6727866465404757,
+   "ARF online": 1.075695280885677,
+   "kNN online": 1.022883134565073,
+   "same as last lap": 0.9437500315181461,
+   "served": 1.0281725652706863
+  },
+  "2025": {
+   "SGD online": 0.9893725005146631,
+   "ARF online": 1.0914836278224949,
+   "kNN online": 1.0398685054552326,
+   "same as last lap": 0.9960749625790772,
+   "served": 0.9893725005146631
+  },
+  "2026": {
+   "SGD online": 1.4882182317812906,
+   "ARF online": 1.6252041861098452,
+   "kNN online": 1.5637564257040941,
+   "same as last lap": 1.5437227837313614,
+   "served": 1.4882182317812906
+  }
+ },
+ "candidates": [
+  "SGD online",
+  "ARF online",
+  "kNN online"
+ ],
+ "races": [
+  {
+   "year": 2023,
+   "circuit": "Sakhir",
+   "champion": "v001 SGD online",
+   "scores": {
+    "SGD online": 1.9978,
+    "ARF online": 1.8424,
+    "kNN online": 1.8338,
+    "same as last lap": 0.9159
+   },
+   "psi_max": 0.0,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v001 SGD online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Jeddah",
+   "champion": "v001 SGD online",
+   "scores": {
+    "SGD online": 1.4831,
+    "ARF online": 1.1524,
+    "kNN online": 1.1847,
+    "same as last lap": 0.9815
+   },
+   "psi_max": 2.74,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v002 ARF online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Melbourne",
+   "champion": "v002 ARF online",
+   "scores": {
+    "SGD online": 1.7491,
+    "ARF online": 1.797,
+    "kNN online": 1.3,
+    "same as last lap": 1.3444
+   },
+   "psi_max": 1.805,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v002 ARF online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Baku",
+   "champion": "v002 ARF online",
+   "scores": {
+    "SGD online": 1.6995,
+    "ARF online": 1.253,
+    "kNN online": 0.9796,
+    "same as last lap": 0.7866
+   },
+   "psi_max": 4.172,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Miami",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 1.2825,
+    "ARF online": 1.0105,
+    "kNN online": 0.971,
+    "same as last lap": 0.9019
+   },
+   "psi_max": 2.062,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Monte Carlo",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 708.442,
+    "ARF online": 0.9445,
+    "kNN online": 0.9246,
+    "same as last lap": 0.7256
+   },
+   "psi_max": 7.705,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Catalunya",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 1.151,
+    "ARF online": 1.0424,
+    "kNN online": 1.0416,
+    "same as last lap": 0.9137
+   },
+   "psi_max": 2.312,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Montreal",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 1.1024,
+    "ARF online": 1.0731,
+    "kNN online": 1.0403,
+    "same as last lap": 0.9777
+   },
+   "psi_max": 1.139,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Spielberg",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 1.5272,
+    "ARF online": 1.3903,
+    "kNN online": 1.2583,
+    "same as last lap": 1.2802
+   },
+   "psi_max": 1.54,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Silverstone",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 1.1334,
+    "ARF online": 1.0579,
+    "kNN online": 1.0492,
+    "same as last lap": 0.9596
+   },
+   "psi_max": 3.084,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Hungaroring",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 0.8806,
+    "ARF online": 0.8945,
+    "kNN online": 0.9248,
+    "same as last lap": 0.8157
+   },
+   "psi_max": 3.42,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v003 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Spa-Francorchamps",
+   "champion": "v003 kNN online",
+   "scores": {
+    "SGD online": 1.2039,
+    "ARF online": 1.1139,
+    "kNN online": 1.1901,
+    "same as last lap": 0.967
+   },
+   "psi_max": 3.565,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v004 ARF online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Zandvoort",
+   "champion": "v004 ARF online",
+   "scores": {
+    "SGD online": 1.2506,
+    "ARF online": 1.1791,
+    "kNN online": 1.3239,
+    "same as last lap": 1.2379
+   },
+   "psi_max": 2.186,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v004 ARF online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Monza",
+   "champion": "v004 ARF online",
+   "scores": {
+    "SGD online": 1.1981,
+    "ARF online": 1.2457,
+    "kNN online": 1.0069,
+    "same as last lap": 0.9177
+   },
+   "psi_max": 5.865,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Singapore",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.152,
+    "ARF online": 1.152,
+    "kNN online": 1.1175,
+    "same as last lap": 0.9931
+   },
+   "psi_max": 2.619,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Suzuka",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.1747,
+    "ARF online": 1.0748,
+    "kNN online": 1.038,
+    "same as last lap": 1.0598
+   },
+   "psi_max": 1.97,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Lusail",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.1266,
+    "ARF online": 1.0948,
+    "kNN online": 0.9404,
+    "same as last lap": 1.0376
+   },
+   "psi_max": 1.544,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Austin",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.0408,
+    "ARF online": 0.9856,
+    "kNN online": 0.9146,
+    "same as last lap": 0.8608
+   },
+   "psi_max": 1.755,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Mexico City",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.2468,
+    "ARF online": 1.1975,
+    "kNN online": 1.0995,
+    "same as last lap": 1.0804
+   },
+   "psi_max": 2.742,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Interlagos",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.1296,
+    "ARF online": 1.1373,
+    "kNN online": 1.0541,
+    "same as last lap": 1.0724
+   },
+   "psi_max": 2.214,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Las Vegas",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.4306,
+    "ARF online": 1.4595,
+    "kNN online": 1.2864,
+    "same as last lap": 1.3492
+   },
+   "psi_max": 1.296,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2023,
+   "circuit": "Yas Marina Circuit",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.1606,
+    "ARF online": 1.1254,
+    "kNN online": 0.9947,
+    "same as last lap": 0.944
+   },
+   "psi_max": 1.396,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Sakhir",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 0.8958,
+    "ARF online": 0.8921,
+    "kNN online": 0.8511,
+    "same as last lap": 0.8338
+   },
+   "psi_max": 0.17,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Jeddah",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.0178,
+    "ARF online": 1.3551,
+    "kNN online": 1.0314,
+    "same as last lap": 0.9305
+   },
+   "psi_max": 0.234,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v005 kNN online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Melbourne",
+   "champion": "v005 kNN online",
+   "scores": {
+    "SGD online": 1.0,
+    "ARF online": 1.1586,
+    "kNN online": 1.0264,
+    "same as last lap": 1.0468
+   },
+   "psi_max": 0.294,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v006 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Suzuka",
+   "champion": "v006 SGD online",
+   "scores": {
+    "SGD online": 1.0837,
+    "ARF online": 1.0856,
+    "kNN online": 0.9796,
+    "same as last lap": 1.0175
+   },
+   "psi_max": 0.193,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v006 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Shanghai",
+   "champion": "v006 SGD online",
+   "scores": {
+    "SGD online": 1.1279,
+    "ARF online": 1.1313,
+    "kNN online": 1.0528,
+    "same as last lap": 1.0082
+   },
+   "psi_max": 3.479,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v007 kNN online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Miami",
+   "champion": "v007 kNN online",
+   "scores": {
+    "SGD online": 1.2634,
+    "ARF online": 1.1791,
+    "kNN online": 1.1707,
+    "same as last lap": 1.0451
+   },
+   "psi_max": 0.164,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v007 kNN online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Imola",
+   "champion": "v007 kNN online",
+   "scores": {
+    "SGD online": 0.8833,
+    "ARF online": 0.8235,
+    "kNN online": 0.9211,
+    "same as last lap": 0.8186
+   },
+   "psi_max": 1.869,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Monte Carlo",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 0.9044,
+    "ARF online": 1.0406,
+    "kNN online": 0.9435,
+    "same as last lap": 0.7734
+   },
+   "psi_max": 0.395,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Montreal",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 15.6438,
+    "ARF online": 1.3378,
+    "kNN online": 1.3666,
+    "same as last lap": 1.1488
+   },
+   "psi_max": 0.915,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Catalunya",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 0.978,
+    "ARF online": 1.065,
+    "kNN online": 0.993,
+    "same as last lap": 0.9714
+   },
+   "psi_max": 0.076,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Spielberg",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 1.2305,
+    "ARF online": 1.2289,
+    "kNN online": 1.1023,
+    "same as last lap": 1.1864
+   },
+   "psi_max": 0.199,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Silverstone",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 1.0001,
+    "ARF online": 1.0908,
+    "kNN online": 1.2283,
+    "same as last lap": 0.9854
+   },
+   "psi_max": 0.237,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Hungaroring",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 0.844,
+    "ARF online": 0.9807,
+    "kNN online": 0.9107,
+    "same as last lap": 0.8024
+   },
+   "psi_max": 0.048,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v008 ARF online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Spa-Francorchamps",
+   "champion": "v008 ARF online",
+   "scores": {
+    "SGD online": 1.041,
+    "ARF online": 1.131,
+    "kNN online": 1.1041,
+    "same as last lap": 0.8835
+   },
+   "psi_max": 1.051,
+   "trigger": "feature drift",
+   "decision": "PROMOTE",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Zandvoort",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9491,
+    "ARF online": 0.8725,
+    "kNN online": 1.0073,
+    "same as last lap": 0.8903
+   },
+   "psi_max": 0.664,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Monza",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9867,
+    "ARF online": 1.138,
+    "kNN online": 1.0236,
+    "same as last lap": 0.9941
+   },
+   "psi_max": 0.611,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Baku",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9573,
+    "ARF online": 1.1665,
+    "kNN online": 0.9589,
+    "same as last lap": 0.7949
+   },
+   "psi_max": 0.157,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Singapore",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8427,
+    "ARF online": 0.9247,
+    "kNN online": 0.9069,
+    "same as last lap": 0.8545
+   },
+   "psi_max": 0.304,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Austin",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9202,
+    "ARF online": 0.9217,
+    "kNN online": 0.912,
+    "same as last lap": 0.9012
+   },
+   "psi_max": 1.06,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Mexico City",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9697,
+    "ARF online": 1.0128,
+    "kNN online": 0.9721,
+    "same as last lap": 0.9567
+   },
+   "psi_max": 0.26,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Interlagos",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8063,
+    "ARF online": 1.0304,
+    "kNN online": 0.8711,
+    "same as last lap": 0.8341
+   },
+   "psi_max": 2.556,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Las Vegas",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1253,
+    "ARF online": 1.2602,
+    "kNN online": 1.3382,
+    "same as last lap": 1.0682
+   },
+   "psi_max": 0.275,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Lusail",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.0899,
+    "ARF online": 1.1719,
+    "kNN online": 1.0937,
+    "same as last lap": 1.0353
+   },
+   "psi_max": 1.495,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2024,
+   "circuit": "Yas Marina Circuit",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9944,
+    "ARF online": 1.0719,
+    "kNN online": 0.9252,
+    "same as last lap": 0.9378
+   },
+   "psi_max": 0.164,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Melbourne",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2892,
+    "ARF online": 1.4824,
+    "kNN online": 1.3411,
+    "same as last lap": 1.3385
+   },
+   "psi_max": 3.531,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Shanghai",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9114,
+    "ARF online": 0.9881,
+    "kNN online": 0.9229,
+    "same as last lap": 0.8295
+   },
+   "psi_max": 0.62,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Suzuka",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.7756,
+    "ARF online": 0.847,
+    "kNN online": 0.833,
+    "same as last lap": 0.7587
+   },
+   "psi_max": 1.304,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Sakhir",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9537,
+    "ARF online": 1.0046,
+    "kNN online": 1.0346,
+    "same as last lap": 1.0153
+   },
+   "psi_max": 0.526,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Jeddah",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.0422,
+    "ARF online": 1.1269,
+    "kNN online": 1.119,
+    "same as last lap": 1.0012
+   },
+   "psi_max": 0.508,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Miami",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1901,
+    "ARF online": 1.3262,
+    "kNN online": 1.3432,
+    "same as last lap": 1.0942
+   },
+   "psi_max": 0.492,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Imola",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.0941,
+    "ARF online": 1.107,
+    "kNN online": 1.1216,
+    "same as last lap": 1.0964
+   },
+   "psi_max": 0.815,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Monte Carlo",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9655,
+    "ARF online": 1.1025,
+    "kNN online": 1.0014,
+    "same as last lap": 0.9342
+   },
+   "psi_max": 0.135,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Catalunya",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.0759,
+    "ARF online": 1.1224,
+    "kNN online": 1.1467,
+    "same as last lap": 1.1095
+   },
+   "psi_max": 0.316,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Montreal",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9392,
+    "ARF online": 0.9913,
+    "kNN online": 0.993,
+    "same as last lap": 0.9766
+   },
+   "psi_max": 0.548,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Spielberg",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2178,
+    "ARF online": 1.3205,
+    "kNN online": 1.21,
+    "same as last lap": 1.2156
+   },
+   "psi_max": 0.078,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Silverstone",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.4027,
+    "ARF online": 1.5243,
+    "kNN online": 1.4983,
+    "same as last lap": 1.4708
+   },
+   "psi_max": 2.237,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Spa-Francorchamps",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8648,
+    "ARF online": 1.0918,
+    "kNN online": 0.9117,
+    "same as last lap": 0.7977
+   },
+   "psi_max": 0.418,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Hungaroring",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8189,
+    "ARF online": 0.8849,
+    "kNN online": 0.9495,
+    "same as last lap": 0.8345
+   },
+   "psi_max": 0.749,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Zandvoort",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2219,
+    "ARF online": 1.182,
+    "kNN online": 1.1206,
+    "same as last lap": 1.2338
+   },
+   "psi_max": 0.123,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Monza",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8599,
+    "ARF online": 1.1294,
+    "kNN online": 0.9869,
+    "same as last lap": 0.8865
+   },
+   "psi_max": 0.323,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Baku",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8825,
+    "ARF online": 1.0255,
+    "kNN online": 0.8858,
+    "same as last lap": 0.8239
+   },
+   "psi_max": 0.192,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Singapore",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8447,
+    "ARF online": 0.9855,
+    "kNN online": 0.9302,
+    "same as last lap": 0.8931
+   },
+   "psi_max": 0.357,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Austin",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8854,
+    "ARF online": 0.9489,
+    "kNN online": 0.9287,
+    "same as last lap": 0.8949
+   },
+   "psi_max": 0.245,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Mexico City",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9034,
+    "ARF online": 1.0602,
+    "kNN online": 0.9856,
+    "same as last lap": 0.9323
+   },
+   "psi_max": 0.032,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Interlagos",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1181,
+    "ARF online": 1.1872,
+    "kNN online": 1.1793,
+    "same as last lap": 1.2076
+   },
+   "psi_max": 1.286,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Las Vegas",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.0001,
+    "ARF online": 1.1584,
+    "kNN online": 1.0589,
+    "same as last lap": 0.9924
+   },
+   "psi_max": 0.216,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Lusail",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9066,
+    "ARF online": 1.046,
+    "kNN online": 0.9623,
+    "same as last lap": 0.9266
+   },
+   "psi_max": 1.488,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2025,
+   "circuit": "Yas Marina Circuit",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9677,
+    "ARF online": 1.088,
+    "kNN online": 0.9456,
+    "same as last lap": 0.9516
+   },
+   "psi_max": 0.052,
+   "trigger": null,
+   "decision": "NO TRIGGER",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Melbourne",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2307,
+    "ARF online": 1.4188,
+    "kNN online": 1.3014,
+    "same as last lap": 1.3637
+   },
+   "psi_max": 0.851,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Shanghai",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.4515,
+    "ARF online": 1.6509,
+    "kNN online": 1.6216,
+    "same as last lap": 1.4503
+   },
+   "psi_max": 1.025,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Suzuka",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.6029,
+    "ARF online": 1.725,
+    "kNN online": 1.717,
+    "same as last lap": 1.6079
+   },
+   "psi_max": 2.326,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Miami",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1018,
+    "ARF online": 1.1469,
+    "kNN online": 1.1938,
+    "same as last lap": 1.065
+   },
+   "psi_max": 1.519,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Montreal",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9802,
+    "ARF online": 1.0095,
+    "kNN online": 1.0085,
+    "same as last lap": 1.0871
+   },
+   "psi_max": 1.432,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Monte Carlo",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.0127,
+    "ARF online": 1.3603,
+    "kNN online": 1.1495,
+    "same as last lap": 1.0153
+   },
+   "psi_max": 1.406,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Catalunya",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1321,
+    "ARF online": 1.246,
+    "kNN online": 1.174,
+    "same as last lap": 1.1756
+   },
+   "psi_max": 2.975,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Spielberg",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2083,
+    "ARF online": 1.2339,
+    "kNN online": 1.1259,
+    "same as last lap": 1.2104
+   },
+   "psi_max": 1.815,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Silverstone",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1441,
+    "ARF online": 1.2068,
+    "kNN online": 1.2101,
+    "same as last lap": 1.1998
+   },
+   "psi_max": 1.019,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Spa-Francorchamps",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.176,
+    "ARF online": 1.3229,
+    "kNN online": 1.2076,
+    "same as last lap": 1.2152
+   },
+   "psi_max": 0.971,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Hungaroring",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 5.8129,
+    "ARF online": 5.9938,
+    "kNN online": 5.8571,
+    "same as last lap": 6.0798
+   },
+   "psi_max": 1.357,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Zandvoort",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2946,
+    "ARF online": 1.2692,
+    "kNN online": 1.3541,
+    "same as last lap": 1.3056
+   },
+   "psi_max": 1.478,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Monza",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.205,
+    "ARF online": 1.4363,
+    "kNN online": 1.3101,
+    "same as last lap": 1.2899
+   },
+   "psi_max": 1.593,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Baku",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.8587,
+    "ARF online": 1.2161,
+    "kNN online": 1.1802,
+    "same as last lap": 0.805
+   },
+   "psi_max": 1.208,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Singapore",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9078,
+    "ARF online": 1.0063,
+    "kNN online": 1.0041,
+    "same as last lap": 0.9801
+   },
+   "psi_max": 1.784,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Austin",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 0.9638,
+    "ARF online": 1.0399,
+    "kNN online": 1.006,
+    "same as last lap": 1.0067
+   },
+   "psi_max": 2.024,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Mexico City",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.2114,
+    "ARF online": 1.3155,
+    "kNN online": 1.195,
+    "same as last lap": 1.2903
+   },
+   "psi_max": 2.835,
+   "trigger": "feature drift",
+   "decision": "KEEP",
+   "champion_after": "v009 SGD online"
+  },
+  {
+   "year": 2026,
+   "circuit": "Interlagos",
+   "champion": "v009 SGD online",
+   "scores": {
+    "SGD online": 1.1767,
+    "ARF online": 1.3859,
+    "kNN online": 1.3109,
+    "same as last lap": 1.2341
+   },
+   "psi_max": 1.185,
+   "trigger": "feature drift",
+   "decision": "COOLDOWN",
+   "champion_after": "v009 SGD online"
+  }
+ ],
+ "served_by": {
+  "SGD online": 56,
+  "ARF online": 11,
+  "kNN online": 21
+ },
+ "stage2": {
+  "SGD online": {
+   "2024": 0.3022,
+   "2025": 0.2973,
+   "2026": 0.3383,
+   "2024-2025": 0.2998,
+   "2025 last 3 GPs": 0.2119,
+   "all": 0.3107
+  },
+  "SGD frozen": {
+   "2024": 0.3061,
+   "2025": 0.3043,
+   "2026": 0.4144,
+   "2024-2025": 0.3052,
+   "2025 last 3 GPs": 0.2126,
+   "all": 0.3361
+  },
+  "ARF online": {
+   "2024": 0.3425,
+   "2025": 0.3568,
+   "2026": 0.3761,
+   "2024-2025": 0.3495,
+   "2025 last 3 GPs": 0.2368,
+   "all": 0.3571
+  },
+  "ARF frozen": {
+   "2024": 0.3336,
+   "2025": 0.3322,
+   "2026": 0.3671,
+   "2024-2025": 0.3329,
+   "2025 last 3 GPs": 0.2299,
+   "all": 0.3426
+  },
+  "kNN online": {
+   "2024": 0.3301,
+   "2025": 0.3341,
+   "2026": 0.359,
+   "2024-2025": 0.3321,
+   "2025 last 3 GPs": 0.2307,
+   "all": 0.3397
+  },
+  "kNN frozen": {
+   "2024": 0.3333,
+   "2025": 0.33,
+   "2026": 0.3692,
+   "2024-2025": 0.3317,
+   "2025 last 3 GPs": 0.2436,
+   "all": 0.3423
+  }
+ },
+ "engines": "SGD river \u00b7 ARF CapyMOA (MOA) \u00b7 kNN numpy (identical to river kNN)"
+}

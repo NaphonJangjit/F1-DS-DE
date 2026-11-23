@@ -314,13 +314,15 @@ def _add_wind_rain(raw, corners):
 # ---------------------------------------------------------------------
 # prepare_data เดียวกับ train.py แต่เก็บ keys + extra columns ไว้
 # ---------------------------------------------------------------------
-def _prepare_lab(raw, extra_cols):
+def _prepare_lab(raw, extra_cols, outlier_k=None):
+    """outlier_k: MAD multiple for remove_duration_outliers (None = OUTLIER_K; math.inf keeps every row,
+    e.g. to predict pit / SC laps at serving time)."""
     df = raw.copy()
     df, _ = add_prev_trend_features(df)
     if TARGET not in df.columns:
         rawc = pd.to_numeric(df["Duration"], errors="coerce")
         df[TARGET] = np.log(rawc.where(rawc > 0))
-    df, removed = remove_duration_outliers(df, k=float(OUTLIER_K))
+    df, removed = remove_duration_outliers(df, k=float(OUTLIER_K if outlier_k is None else outlier_k))
     df = df.rename(columns={low: cap for low, cap in WEATHER_MAP.items()
                             if cap not in df.columns and low in df.columns})
     missing = [c for c in REQUIRED_COLS if c not in df.columns]

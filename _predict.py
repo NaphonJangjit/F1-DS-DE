@@ -4,7 +4,7 @@ Usage:
     python _predict.py                          # predict data_2025_out.parquet -> predictions_2025.parquet
     from _predict import load_models, predict   # use as a library
 
-Requires the models saved by _fforest.py under model/v2/ (sub_<channel>.pkl + main.pkl + meta.json).
+Requires the models saved by _fforest.py under model/v3/ (sub_<channel>.pkl + main.pkl + meta.json).
 """
 
 import json
@@ -14,11 +14,12 @@ import joblib
 import numpy as np
 import pandas as pd
 
+from f1pit.pace_context import add_pace_context, add_relative_pace
 from f1pit.wind_rain_lab import _prepare_lab
 import _fforest as ff
 
 ROOT = Path(__file__).resolve().parent
-VERSION = "v2"
+VERSION = "v3"
 MODEL_DIR = ROOT / "model" / VERSION
 
 
@@ -33,27 +34,29 @@ def load_models(version=VERSION):
     return meta, subs, main
 
 
-def predict(raw, meta, subs, main):
+def predict(raw, meta, subs, main, outlier_k=None):
     """raw: DataFrame from data_*_out.parquet -> same frame + Pred_<channel> + Pred_Duration_s (sec).
 
     `raw` must contain the point-in-time features (Prev_*, Tyre_Age_*, weather, traffic, Lap,
-    Track_Status, geometry) and Duration (for Log_Duration + outlier cleaning).
+    Track_Status, geometry) and Duration (for Log_Duration + outlier cleaning), for WHOLE sessions:
+    the pace context (Rep_* anchors, previous-lap SC, rain history) is built from earlier laps.
+    Duration = anchor x exp(main-forest delta), anchor = meta["anchor"] (Rep_Prev_Duration).
+    outlier_k: passed to _prepare_lab (None = training cleaning; math.inf = keep and predict every row).
     """
-    df, _, _, _ = _prepare_lab(raw, meta["extra"])
+    raw = add_pace_context(raw, tol=meta.get("rep_tol", 1.12))
+    raw = raw.assign(**{c: np.nan for c in meta["extra"] if c not in raw.columns})  # Outcome_* unused here
+    df, _, _, _ = _prepare_lab(raw, meta["extra"], outlier_k=outlier_k)
     df = ff._engineer(df)
 
     for prev, out in meta["channels"]:
         m = subs[out]
         p = m["rf"].predict(m["pre"].transform(df[m["feats"]]))
-        if m["variant"] == "delta":
-            p = df[prev].to_numpy(float) + p
-        elif m["variant"] == "delta_slog":
-            p = df[prev].to_numpy(float) + ff._slog_inv(p)
-        elif m["variant"] == "log":
-            p = np.exp(p)
-        df[f"Pred_{out}"] = p
+        # same inverse transform as training (incl. the delta_slog clip), since main.pkl consumes Pred_*
+        df[f"Pred_{out}"] = ff._to_level(m["variant"], p, df[prev].to_numpy(float))
 
-    df["Pred_Duration_s"] = df["Prev_Duration"].to_numpy(float) * np.exp(
+    anchor = meta.get("anchor", "Prev_Duration")
+    df, _ = add_relative_pace(df, anchor)
+    df["Pred_Duration_s"] = df[anchor].to_numpy(float) * np.exp(
         main["rf"].predict(main["pre"].transform(df[main["feats"]])))
     return df
 

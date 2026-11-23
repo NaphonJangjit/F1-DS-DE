@@ -1,4 +1,4 @@
-"""Write fif_report_v2.md from fforest_results.json (forest-of-forests v2)."""
+"""Write fif_report_v2.md from fforest_results.json (forest-of-forests v3)."""
 
 import json
 from datetime import date
@@ -44,7 +44,7 @@ def main():
     deg = data.get("degradation", {})
 
     L = []
-    L.append("# Forest-of-forests v2 — tyre-aware telemetry → Duration")
+    L.append("# Forest-of-forests v3 — tyre-aware telemetry → Duration")
     L.append("")
     L.append(f"Generated: {date.today().isoformat()}  |  source: `fforest_results.json`")
     L.append("")
@@ -55,7 +55,8 @@ def main():
     L.append("Each channel predicts its current value from its previous value + tyre + weather + "
              "traffic + Lap + Track_Status + channel-specific geometry. Winning variant (level / "
              "delta / log) chosen by held-out-2024 MAE. \"Beat persistence\" = the forest predicts "
-             "current better than the naive `current = previous` baseline.")
+             "current better than the naive `current = previous` baseline. Winners are then 5-fold "
+             "cross-fitted on 2023+2024 (out-of-fold `Pred_*` for the stage-2 training rows).")
     L.append("")
     L.append("| Channel | variant | beat persist. | persist. MAE | RF MAE | RF R² | SGD MAE | Σ tyre imp. |")
     L.append("|---|---|---|---|---|---|---|---|")
@@ -95,7 +96,7 @@ def main():
         grid = deg.get("grid", [])
         if curve:
             lo, hi = min(curve), max(curve)
-            L.append(f"Partial dependence of predicted **delta** (`Log_Duration − log Prev_Duration`) on "
+            L.append(f"Partial dependence of predicted **delta** (`Log_Duration − log anchor`) on "
                      f"`Tyre_Age_Total` (main forest, all else at median). Range {lo:.4f} → {hi:.4f} "
                      f"(Δ ≈ {(hi - lo):.4f} in log-ratio space).")
             L.append("")
@@ -111,18 +112,24 @@ def main():
     # ---- stage 2 ----
     L.append("## Stage 2 — main forest (target = delta)")
     L.append("")
-    L.append("The main forest predicts the **delta** `Log_Duration − log(Prev_Duration)` (the lap-over-lap "
-             "log ratio), then reconstructs `Duration = Prev_Duration × exp(delta)`. Two telemetry feature "
-             "sets are compared — raw `Prev_*` vs tyre-aware `Pred_*` — each with RF, SGD, KNN, XGBoost "
-             "and CatBoost.")
+    anchor = (stage2.get("pred") or {}).get("anchor", "Prev_Duration")
+    L.append(f"The main forest predicts the **delta** `Log_Duration − log({anchor})` (ratio to the last "
+             f"representative lap), then reconstructs `Duration = {anchor} × exp(delta)`. Trained on "
+             "2023+2024. Telemetry enters only as the tyre-aware `Pred_*` (raw `Prev_*` telemetry and "
+             "speed traps are excluded); duration anchors enter as log-ratios to the anchor (`Rel_*`). "
+             "Fitted with RF, SGD, KNN (+ XGBoost / CatBoost when installed).")
+    share = (stage2.get("pred") or {}).get("pred_importance_sum")
+    if share is not None:
+        L.append("")
+        L.append(f"`Pred_*` share of RF importance: **{share:.3f}**.")
     L.append("")
     L.append("MAE in **seconds** on the 2025 test season.")
     L.append("")
     L.append("| variant | RF | SGD | KNN | XGB | CatBoost |")
     L.append("|---|---|---|---|---|---|")
-    for label in ["prev", "pred"]:
+    for label in ["pred"]:
         v = stage2.get(label, {}) or {}
-        name = "raw Prev_*" if label == "prev" else "Pred_*"
+        name = "Pred_*"
         cells = []
         for m in ["rf", "sgd", "knn", "xgb", "cat"]:
             mae = v.get(f"{m}_mae_s", "—")
@@ -132,9 +139,9 @@ def main():
     L.append("")
     L.append("Each cell = MAE (s) / R² (on reconstructed Duration, 2025 test).")
 
-    bd = (stage2.get("prev") or {}).get("breakdown", {})
+    bd = (stage2.get("pred") or {}).get("breakdown", {})
     if bd:
-        L.append("### 6-condition MAE breakdown (raw Prev_*, RF)")
+        L.append("### 6-condition MAE breakdown (Pred_*, RF)")
         L.append("")
         L.append("| condition | n | MAE (s) |")
         L.append("|---|---|---|")
@@ -144,9 +151,9 @@ def main():
             L.append(f"| {k} | {v.get('n', '—')} | {mae} |")
         L.append("")
 
-    for label in ["prev", "pred"]:
+    for label in ["pred"]:
         v = stage2.get(label, {}) or {}
-        name = "raw Prev_*" if label == "prev" else "Pred_*"
+        name = "Pred_*"
         L.append(f"### Stage 2 feature importance — {name}")
         L.append("")
         L.append(_imp_table(v.get("importance", []), top=30))
@@ -156,11 +163,9 @@ def main():
     L.append("## Interpretation")
     L.append("")
     L.append(f"- **Gate result:** {n_beat}/8 sub-forests beat the persistence baseline. Channels that "
-             "did not beat persistence keep their raw `Prev_*` in the main forest (feeding a worse "
-             "`Pred_*` would only hurt).")
-    L.append("- **Prev_* vs Pred_* (delta target):** raw `Prev_*` telemetry vs tyre-aware `Pred_*`, each "
-             "with RF/SGD/KNN. If `Pred_*` ≈ `Prev_*`, the sub-forests add no signal for the delta; if "
-             "KNN ≈ RF, the signal is local/linear.")
+             "did not beat persistence are dropped from the main forest (no raw `Prev_*` fallback).")
+    L.append("- **Telemetry = Pred_* only:** raw `Prev_*` telemetry is excluded on purpose so the tyre "
+             "effect on lap time flows through the tyre-aware sub-forests and stays explainable.")
     L.append("- **Degradation:** the delta curve's slope vs `Tyre_Age_Total` is the degradation rate a "
              "pit-stop optimizer would use.")
 

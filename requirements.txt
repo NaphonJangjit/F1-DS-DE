@@ -5,8 +5,12 @@ scikit-learn
 requests
 kmodes
 kneed
+river        # _online.py, _stream_fast.py (online SGD)
+capymoa      # _stream_fast.py (online ARF on MOA; needs a Java JDK)
 # optional
 # lightgbm
 # xgboost
 # catboost
 # pyarrow   # สำหรับ .parquet
+fastapi      # _web_api.py (web page -> model/prod, online lineage)
+uvicorn

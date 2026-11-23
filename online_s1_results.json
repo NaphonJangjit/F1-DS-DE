@@ -1,0 +1,590 @@
+{
+  "pipeline": "fully incremental: stage 1 online (champion / challenger) -> stage 2 online",
+  "engines": "SGD river \u00b7 ARF CapyMOA (MOA) \u00b7 kNN numpy (identical to river kNN)",
+  "mae_s": {
+    "SGD online": {
+      "2024": 0.3022,
+      "2025": 0.2973,
+      "2026": 0.3383,
+      "2024-2025": 0.2998,
+      "2025 last 3 GPs": 0.2119,
+      "all": 0.3107
+    },
+    "SGD frozen": {
+      "2024": 0.3061,
+      "2025": 0.3043,
+      "2026": 0.4144,
+      "2024-2025": 0.3052,
+      "2025 last 3 GPs": 0.2126,
+      "all": 0.3361
+    },
+    "ARF online": {
+      "2024": 0.3425,
+      "2025": 0.3568,
+      "2026": 0.3761,
+      "2024-2025": 0.3495,
+      "2025 last 3 GPs": 0.2368,
+      "all": 0.3571
+    },
+    "ARF frozen": {
+      "2024": 0.3336,
+      "2025": 0.3322,
+      "2026": 0.3671,
+      "2024-2025": 0.3329,
+      "2025 last 3 GPs": 0.2299,
+      "all": 0.3426
+    },
+    "kNN online": {
+      "2024": 0.3301,
+      "2025": 0.3341,
+      "2026": 0.359,
+      "2024-2025": 0.3321,
+      "2025 last 3 GPs": 0.2307,
+      "all": 0.3397
+    },
+    "kNN frozen": {
+      "2024": 0.3333,
+      "2025": 0.33,
+      "2026": 0.3692,
+      "2024-2025": 0.3317,
+      "2025 last 3 GPs": 0.2436,
+      "all": 0.3423
+    }
+  },
+  "stage1_accuracy": {
+    "SGD": {
+      "Outcome_Avg_Speed_Corners": {
+        "2023": {
+          "online": 1714.2513,
+          "same_as_last_lap": 6.2974
+        },
+        "2024": {
+          "online": 7.8159,
+          "same_as_last_lap": 6.0505
+        },
+        "2025": {
+          "online": 6.7256,
+          "same_as_last_lap": 6.4432
+        },
+        "2026": {
+          "online": 7.4774,
+          "same_as_last_lap": 7.8194
+        }
+      },
+      "Outcome_Avg_Speed_Straight": {
+        "2023": {
+          "online": 16.3601,
+          "same_as_last_lap": 4.6409
+        },
+        "2024": {
+          "online": 12.2776,
+          "same_as_last_lap": 4.3489
+        },
+        "2025": {
+          "online": 4.5637,
+          "same_as_last_lap": 4.6265
+        },
+        "2026": {
+          "online": 8.3457,
+          "same_as_last_lap": 8.4767
+        }
+      },
+      "Outcome_Full_Throttle_Pct": {
+        "2023": {
+          "online": 6.6856,
+          "same_as_last_lap": 3.7686
+        },
+        "2024": {
+          "online": 4.4564,
+          "same_as_last_lap": 3.6105
+        },
+        "2025": {
+          "online": 4.1961,
+          "same_as_last_lap": 4.0021
+        },
+        "2026": {
+          "online": 4.9779,
+          "same_as_last_lap": 5.4507
+        }
+      },
+      "Outcome_Brake_Pct": {
+        "2023": {
+          "online": 3.2264,
+          "same_as_last_lap": 2.4144
+        },
+        "2024": {
+          "online": 2.3451,
+          "same_as_last_lap": 2.3583
+        },
+        "2025": {
+          "online": 2.2185,
+          "same_as_last_lap": 2.4989
+        },
+        "2026": {
+          "online": 3.1846,
+          "same_as_last_lap": 3.5087
+        }
+      },
+      "Outcome_DRS_Pct": {
+        "2023": {
+          "online": 14.2958,
+          "same_as_last_lap": 2.5721
+        },
+        "2024": {
+          "online": 2.6001,
+          "same_as_last_lap": 2.4731
+        },
+        "2025": {
+          "online": 2.4581,
+          "same_as_last_lap": 2.454
+        },
+        "2026": {
+          "online": null,
+          "same_as_last_lap": null
+        }
+      },
+      "Outcome_Max_Speed": {
+        "2023": {
+          "online": 16.4208,
+          "same_as_last_lap": 4.7108
+        },
+        "2024": {
+          "online": 12.731,
+          "same_as_last_lap": 4.3097
+        },
+        "2025": {
+          "online": 4.4686,
+          "same_as_last_lap": 4.4871
+        },
+        "2026": {
+          "online": 9.133,
+          "same_as_last_lap": 9.1958
+        }
+      },
+      "Outcome_Min_Speed": {
+        "2023": {
+          "online": 16.1721,
+          "same_as_last_lap": 4.4573
+        },
+        "2024": {
+          "online": 11.965,
+          "same_as_last_lap": 4.1673
+        },
+        "2025": {
+          "online": 4.282,
+          "same_as_last_lap": 4.2919
+        },
+        "2026": {
+          "online": 5.9349,
+          "same_as_last_lap": 5.9597
+        }
+      },
+      "Outcome_Avg_Gear": {
+        "2023": {
+          "online": 0.1589,
+          "same_as_last_lap": 0.1593
+        },
+        "2024": {
+          "online": 0.1504,
+          "same_as_last_lap": 0.1444
+        },
+        "2025": {
+          "online": 0.154,
+          "same_as_last_lap": 0.1565
+        },
+        "2026": {
+          "online": 0.2425,
+          "same_as_last_lap": 0.2468
+        }
+      }
+    },
+    "ARF": {
+      "Outcome_Avg_Speed_Corners": {
+        "2023": {
+          "online": 9.5952,
+          "same_as_last_lap": 6.2974
+        },
+        "2024": {
+          "online": 7.8355,
+          "same_as_last_lap": 6.0505
+        },
+        "2025": {
+          "online": 8.1199,
+          "same_as_last_lap": 6.4432
+        },
+        "2026": {
+          "online": 8.6844,
+          "same_as_last_lap": 7.8194
+        }
+      },
+      "Outcome_Avg_Speed_Straight": {
+        "2023": {
+          "online": 4.6198,
+          "same_as_last_lap": 4.6409
+        },
+        "2024": {
+          "online": 4.5129,
+          "same_as_last_lap": 4.3489
+        },
+        "2025": {
+          "online": 4.5811,
+          "same_as_last_lap": 4.6265
+        },
+        "2026": {
+          "online": 8.4338,
+          "same_as_last_lap": 8.4767
+        }
+      },
+      "Outcome_Full_Throttle_Pct": {
+        "2023": {
+          "online": 6.1617,
+          "same_as_last_lap": 3.7686
+        },
+        "2024": {
+          "online": 5.7203,
+          "same_as_last_lap": 3.6105
+        },
+        "2025": {
+          "online": 5.5861,
+          "same_as_last_lap": 4.0021
+        },
+        "2026": {
+          "online": 6.5236,
+          "same_as_last_lap": 5.4507
+        }
+      },
+      "Outcome_Brake_Pct": {
+        "2023": {
+          "online": 2.8087,
+          "same_as_last_lap": 2.4144
+        },
+        "2024": {
+          "online": 2.5662,
+          "same_as_last_lap": 2.3583
+        },
+        "2025": {
+          "online": 2.6069,
+          "same_as_last_lap": 2.4989
+        },
+        "2026": {
+          "online": 3.9231,
+          "same_as_last_lap": 3.5087
+        }
+      },
+      "Outcome_DRS_Pct": {
+        "2023": {
+          "online": 2.6668,
+          "same_as_last_lap": 2.5721
+        },
+        "2024": {
+          "online": 2.5466,
+          "same_as_last_lap": 2.4731
+        },
+        "2025": {
+          "online": 2.5322,
+          "same_as_last_lap": 2.454
+        },
+        "2026": {
+          "online": null,
+          "same_as_last_lap": null
+        }
+      },
+      "Outcome_Max_Speed": {
+        "2023": {
+          "online": 4.8001,
+          "same_as_last_lap": 4.7108
+        },
+        "2024": {
+          "online": 4.5137,
+          "same_as_last_lap": 4.3097
+        },
+        "2025": {
+          "online": 4.5589,
+          "same_as_last_lap": 4.4871
+        },
+        "2026": {
+          "online": 9.1921,
+          "same_as_last_lap": 9.1958
+        }
+      },
+      "Outcome_Min_Speed": {
+        "2023": {
+          "online": 4.7357,
+          "same_as_last_lap": 4.4573
+        },
+        "2024": {
+          "online": 4.1498,
+          "same_as_last_lap": 4.1673
+        },
+        "2025": {
+          "online": 4.2808,
+          "same_as_last_lap": 4.2919
+        },
+        "2026": {
+          "online": 5.9397,
+          "same_as_last_lap": 5.9597
+        }
+      },
+      "Outcome_Avg_Gear": {
+        "2023": {
+          "online": 0.1614,
+          "same_as_last_lap": 0.1593
+        },
+        "2024": {
+          "online": 0.148,
+          "same_as_last_lap": 0.1444
+        },
+        "2025": {
+          "online": 0.1563,
+          "same_as_last_lap": 0.1565
+        },
+        "2026": {
+          "online": 0.2454,
+          "same_as_last_lap": 0.2468
+        }
+      }
+    },
+    "kNN": {
+      "Outcome_Avg_Speed_Corners": {
+        "2023": {
+          "online": 9.0076,
+          "same_as_last_lap": 6.2974
+        },
+        "2024": {
+          "online": 7.4311,
+          "same_as_last_lap": 6.0505
+        },
+        "2025": {
+          "online": 7.5603,
+          "same_as_last_lap": 6.4432
+        },
+        "2026": {
+          "online": 8.7849,
+          "same_as_last_lap": 7.8194
+        }
+      },
+      "Outcome_Avg_Speed_Straight": {
+        "2023": {
+          "online": 4.5072,
+          "same_as_last_lap": 4.6409
+        },
+        "2024": {
+          "online": 4.2649,
+          "same_as_last_lap": 4.3489
+        },
+        "2025": {
+          "online": 4.5158,
+          "same_as_last_lap": 4.6265
+        },
+        "2026": {
+          "online": 8.2187,
+          "same_as_last_lap": 8.4767
+        }
+      },
+      "Outcome_Full_Throttle_Pct": {
+        "2023": {
+          "online": 5.2973,
+          "same_as_last_lap": 3.7686
+        },
+        "2024": {
+          "online": 5.0504,
+          "same_as_last_lap": 3.6105
+        },
+        "2025": {
+          "online": 4.8556,
+          "same_as_last_lap": 4.0021
+        },
+        "2026": {
+          "online": 5.925,
+          "same_as_last_lap": 5.4507
+        }
+      },
+      "Outcome_Brake_Pct": {
+        "2023": {
+          "online": 2.7656,
+          "same_as_last_lap": 2.4144
+        },
+        "2024": {
+          "online": 2.5294,
+          "same_as_last_lap": 2.3583
+        },
+        "2025": {
+          "online": 2.5852,
+          "same_as_last_lap": 2.4989
+        },
+        "2026": {
+          "online": 3.7573,
+          "same_as_last_lap": 3.5087
+        }
+      },
+      "Outcome_DRS_Pct": {
+        "2023": {
+          "online": 2.6975,
+          "same_as_last_lap": 2.5721
+        },
+        "2024": {
+          "online": 2.572,
+          "same_as_last_lap": 2.4731
+        },
+        "2025": {
+          "online": 2.5408,
+          "same_as_last_lap": 2.454
+        },
+        "2026": {
+          "online": null,
+          "same_as_last_lap": null
+        }
+      },
+      "Outcome_Max_Speed": {
+        "2023": {
+          "online": 4.6548,
+          "same_as_last_lap": 4.7108
+        },
+        "2024": {
+          "online": 4.4266,
+          "same_as_last_lap": 4.3097
+        },
+        "2025": {
+          "online": 4.4974,
+          "same_as_last_lap": 4.4871
+        },
+        "2026": {
+          "online": 8.829,
+          "same_as_last_lap": 9.1958
+        }
+      },
+      "Outcome_Min_Speed": {
+        "2023": {
+          "online": 3.9431,
+          "same_as_last_lap": 4.4573
+        },
+        "2024": {
+          "online": 3.7682,
+          "same_as_last_lap": 4.1673
+        },
+        "2025": {
+          "online": 3.8933,
+          "same_as_last_lap": 4.2919
+        },
+        "2026": {
+          "online": 5.6682,
+          "same_as_last_lap": 5.9597
+        }
+      },
+      "Outcome_Avg_Gear": {
+        "2023": {
+          "online": 0.1565,
+          "same_as_last_lap": 0.1593
+        },
+        "2024": {
+          "online": 0.1452,
+          "same_as_last_lap": 0.1444
+        },
+        "2025": {
+          "online": 0.1546,
+          "same_as_last_lap": 0.1565
+        },
+        "2026": {
+          "online": 0.24,
+          "same_as_last_lap": 0.2468
+        }
+      }
+    }
+  },
+  "stage1_promote": {
+    "score": "mean over channels of MAE / MAE of 'same as last lap' on 2023 (1.0 = no better than repeating the previous lap, lower is better)",
+    "rules": {
+      "psi_trigger": 0.25,
+      "score_trigger": 1.25,
+      "cooldown": 2,
+      "promote_margin": 0.02,
+      "guardrail": 0.01
+    },
+    "lineage": [
+      {
+        "version": "v001",
+        "model": "SGD online",
+        "since": "2023 race 1",
+        "reason": "same starting champion as stage 2 (SGD); every learner starts empty"
+      },
+      {
+        "version": "v002",
+        "model": "ARF online",
+        "since": "after 2023 Jeddah",
+        "reason": "feature drift: score -0.331"
+      },
+      {
+        "version": "v003",
+        "model": "kNN online",
+        "since": "after 2023 Baku",
+        "reason": "feature drift: score -0.273"
+      },
+      {
+        "version": "v004",
+        "model": "ARF online",
+        "since": "after 2023 Spa-Francorchamps",
+        "reason": "feature drift: score -0.076"
+      },
+      {
+        "version": "v005",
+        "model": "kNN online",
+        "since": "after 2023 Monza",
+        "reason": "feature drift: score -0.239"
+      },
+      {
+        "version": "v006",
+        "model": "SGD online",
+        "since": "after 2024 Melbourne",
+        "reason": "feature drift: score -0.026"
+      },
+      {
+        "version": "v007",
+        "model": "kNN online",
+        "since": "after 2024 Shanghai",
+        "reason": "feature drift: score -0.075"
+      },
+      {
+        "version": "v008",
+        "model": "ARF online",
+        "since": "after 2024 Imola",
+        "reason": "feature drift: score -0.098"
+      },
+      {
+        "version": "v009",
+        "model": "SGD online",
+        "since": "after 2024 Spa-Francorchamps",
+        "reason": "feature drift: score -0.090"
+      }
+    ],
+    "score_by_year": {
+      "2023": {
+        "SGD online": 36.564813523570024,
+        "ARF online": 1.181070612055346,
+        "kNN online": 1.1070520319998896,
+        "same as last lap": 1.0000000000000322,
+        "served": 1.1582058745707626
+      },
+      "2024": {
+        "SGD online": 1.6727866465404757,
+        "ARF online": 1.075695280885677,
+        "kNN online": 1.022883134565073,
+        "same as last lap": 0.9437500315181461,
+        "served": 1.0281725652706863
+      },
+      "2025": {
+        "SGD online": 0.9893725005146631,
+        "ARF online": 1.0914836278224949,
+        "kNN online": 1.0398685054552326,
+        "same as last lap": 0.9960749625790772,
+        "served": 0.9893725005146631
+      },
+      "2026": {
+        "SGD online": 1.4882182317812906,
+        "ARF online": 1.6252041861098452,
+        "kNN online": 1.5637564257040941,
+        "same as last lap": 1.5437227837313614,
+        "served": 1.4882182317812906
+      }
+    }
+  }
+}

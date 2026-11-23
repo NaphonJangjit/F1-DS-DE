@@ -10,6 +10,8 @@ import pandas as pd
 from . import config
 from .api import fetch, to_utc
 
+MAX_LAP_TRIES = 10   # laps tried (inside the location window) when a lap has too few location samples
+
 
 # ---------------------------------------------------------------------
 # tracks.json
@@ -137,21 +139,32 @@ def get_best_race_lap_track(meeting_key, verbose=True):
         verbose and print(f"No valid timed laps in session {session_key}")
         return None, None
 
-    best = valid.loc[valid["lap_duration"].idxmin()]
-    lap_start = pd.to_datetime(best["date_start"], utc=True)
-    lap_end = lap_start + pd.to_timedelta(float(best["lap_duration"]), unit="s")
-    driver_number = int(best["driver_number"])
-
-    location = fetch("location", session_key=session_key, driver_number=driver_number)
-    if location.empty:
-        return None, None
-    location["date"] = to_utc(location["date"])
-    lap_location = location[location["date"].between(lap_start, lap_end)]
-
-    try:
-        track_path = prepare_track_path(lap_location)
-    except ValueError as exc:
-        verbose and print(f"Could not reconstruct lap: {exc}")
+    # fastest lap first; if its location telemetry has a gap (e.g. 2026 Monaco: OpenF1 location stops
+    # mid-race) try the next-fastest laps, skipping laps outside the window the driver's location covers
+    valid = valid.assign(_start=pd.to_datetime(valid["date_start"], utc=True, format="ISO8601"))
+    valid = valid.assign(_end=valid["_start"] + pd.to_timedelta(valid["lap_duration"].astype(float), unit="s"))
+    track_path, locations, tries = None, {}, 0
+    for _, best in valid.sort_values("lap_duration").iterrows():
+        driver_number = int(best["driver_number"])
+        if driver_number not in locations:
+            loc = fetch("location", session_key=session_key, driver_number=driver_number)
+            if not loc.empty:
+                loc["date"] = to_utc(loc["date"])
+            locations[driver_number] = loc
+        location = locations[driver_number]
+        if location.empty or best["_end"] > location["date"].max() or best["_start"] < location["date"].min():
+            continue
+        lap_start, lap_end = best["_start"], best["_end"]
+        tries += 1
+        try:
+            track_path = prepare_track_path(location[location["date"].between(lap_start, lap_end)])
+            break
+        except ValueError as exc:
+            verbose and print(f"Could not reconstruct lap {int(best['lap_number'])} of #{driver_number}: {exc}")
+            if tries >= MAX_LAP_TRIES:
+                break
+    if track_path is None:
+        verbose and print(f"No reconstructable lap in session {session_key}")
         return None, None
 
     lap_info = {

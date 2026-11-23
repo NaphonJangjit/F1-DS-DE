@@ -85,6 +85,22 @@ def _corner_rows(meeting_key, track, gp, track_path, info, verbose):
     return rows
 
 
+def _previous_season_path(year, short_name, verbose=True, back=3):
+    """Track XY path of the same circuit from an earlier season, for races whose own location telemetry
+    is incomplete (2026 Monaco: OpenF1 location stops a few laps into the race). The layout is the same."""
+    for y in range(year - 1, year - 1 - back, -1):
+        prev = fetch("meetings", year=y, is_cancelled=False)
+        prev = prev[prev["circuit_short_name"].eq(short_name)] if not prev.empty else prev
+        if prev.empty:
+            continue
+        path, _ = get_best_race_lap_track(int(prev.iloc[-1]["meeting_key"]), verbose=False)
+        if path is not None:
+            print(f"NOTE: '{short_name}' {year}: location telemetry incomplete -> track path from {y}")
+            return path
+    print(f"WARNING: no track path for '{short_name}' {year} (and none in the previous {back} seasons) — ข้าม")
+    return None
+
+
 def create_circuit_db(year, verbose=True):
     """Returns (circuits_df, corners_df) ของทุก meeting ในปีนั้น (ไม่รวม Pre-Season Testing)
 
@@ -105,6 +121,8 @@ def create_circuit_db(year, verbose=True):
             continue
 
         track_path, _ = get_best_race_lap_track(meeting_key, verbose=verbose)
+        if track_path is None:
+            track_path = _previous_season_path(year, short_name, verbose)
         if track_path is None:
             continue
 

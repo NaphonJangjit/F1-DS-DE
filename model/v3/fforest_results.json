@@ -1,0 +1,1484 @@
+{
+  "stage1": {
+    "Outcome_Avg_Speed_Corners": {
+      "persistence_mae": 6.0505,
+      "best_variant": "log",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 4.8051,
+        "rmse": 7.375,
+        "r2": 0.9219
+      },
+      "rf_oof_2023_2024_mae": 5.2317,
+      "sgd": {
+        "mae": 36800.0942,
+        "rmse": 5266407.4208,
+        "r2": -39808986106.9968
+      },
+      "tyre_importance_sum": 0.00858,
+      "importance": [
+        [
+          "num__Prev_Avg_Speed_Corners",
+          0.518954
+        ],
+        [
+          "num__Prev_Avg_Speed_Corners_roll5_mean",
+          0.354257
+        ],
+        [
+          "num__Straight_Ratio",
+          0.031849
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.018081
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.017527
+        ],
+        [
+          "num__Pressure",
+          0.012604
+        ],
+        [
+          "num__Prev_Avg_Speed_Corners_roll5_slope",
+          0.0091
+        ],
+        [
+          "num__Air_Temperature",
+          0.00863
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.005661
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.005219
+        ],
+        [
+          "num__Track_Temperature",
+          0.004285
+        ],
+        [
+          "num__Humidity",
+          0.003439
+        ],
+        [
+          "num__Lap",
+          0.002658
+        ],
+        [
+          "num__Interval_Ahead",
+          0.001969
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.001514
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.000804
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.000791
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.00062
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.000587
+        ],
+        [
+          "num__missingindicator_Prev_Avg_Speed_Corners_roll5_slope",
+          0.000444
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.000428
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.000212
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.000177
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          0.0001
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          7.1e-05
+        ],
+        [
+          "num__Rainfall",
+          1.8e-05
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_Avg_Speed_Straight": {
+      "persistence_mae": 4.3489,
+      "best_variant": "delta_slog",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 3.7282,
+        "rmse": 6.3561,
+        "r2": 0.927
+      },
+      "rf_oof_2023_2024_mae": 3.8088,
+      "sgd": {
+        "mae": 17.8528,
+        "rmse": 547.0783,
+        "r2": -539.6969
+      },
+      "tyre_importance_sum": 0.13827,
+      "importance": [
+        [
+          "num__Prev_Avg_Speed_Straight_roll5_slope",
+          0.380373
+        ],
+        [
+          "num__Prev_Avg_Speed_Straight_roll5_mean",
+          0.089966
+        ],
+        [
+          "num__Interval_Ahead",
+          0.067794
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.061229
+        ],
+        [
+          "num__Lap",
+          0.043785
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.042103
+        ],
+        [
+          "num__Track_Temperature",
+          0.038793
+        ],
+        [
+          "num__Air_Temperature",
+          0.03067
+        ],
+        [
+          "num__Pressure",
+          0.024983
+        ],
+        [
+          "num__Humidity",
+          0.024726
+        ],
+        [
+          "num__Straight_Ratio",
+          0.023708
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.020138
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.019778
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.017899
+        ],
+        [
+          "num__Total_Straight_Length",
+          0.017464
+        ],
+        [
+          "num__Log_Total_Straight_Length",
+          0.017381
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.016044
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.01592
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.013713
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.01353
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.008612
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.004305
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.004147
+        ],
+        [
+          "num__missingindicator_Prev_Avg_Speed_Straight_roll5_slope",
+          0.001098
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          0.000741
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          0.000695
+        ],
+        [
+          "num__Rainfall",
+          0.000373
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          2.1e-05
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          1.2e-05
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_Full_Throttle_Pct": {
+      "persistence_mae": 3.6105,
+      "best_variant": "level",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 3.166,
+        "rmse": 4.8673,
+        "r2": 0.9204
+      },
+      "rf_oof_2023_2024_mae": 3.1809,
+      "sgd": {
+        "mae": 4.025,
+        "rmse": 32.8931,
+        "r2": -2.6369
+      },
+      "tyre_importance_sum": 0.00692,
+      "importance": [
+        [
+          "num__Prev_Full_Throttle_Pct",
+          0.466899
+        ],
+        [
+          "num__Prev_Full_Throttle_Pct_roll5_mean",
+          0.331141
+        ],
+        [
+          "num__Straight_Ratio",
+          0.091578
+        ],
+        [
+          "num__Total_Straight_Length",
+          0.040639
+        ],
+        [
+          "num__Prev_Full_Throttle_Pct_roll5_slope",
+          0.011961
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.007985
+        ],
+        [
+          "num__Humidity",
+          0.007402
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.007139
+        ],
+        [
+          "num__Track_Temperature",
+          0.005992
+        ],
+        [
+          "num__Pressure",
+          0.005924
+        ],
+        [
+          "num__Air_Temperature",
+          0.005496
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.004402
+        ],
+        [
+          "num__Lap",
+          0.002184
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.002154
+        ],
+        [
+          "num__Interval_Ahead",
+          0.001999
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.001382
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.001255
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.00124
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.000674
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.000631
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.000617
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.000395
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.000395
+        ],
+        [
+          "num__missingindicator_Prev_Full_Throttle_Pct_roll5_slope",
+          0.000321
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          0.000113
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          6.6e-05
+        ],
+        [
+          "num__Rainfall",
+          1.3e-05
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_Brake_Pct": {
+      "persistence_mae": 2.3583,
+      "best_variant": "level",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 1.941,
+        "rmse": 2.7812,
+        "r2": 0.8345
+      },
+      "rf_oof_2023_2024_mae": 1.9398,
+      "sgd": {
+        "mae": 2.358,
+        "rmse": 20.9777,
+        "r2": -8.4136
+      },
+      "tyre_importance_sum": 0.01055,
+      "importance": [
+        [
+          "num__Prev_Brake_Pct_roll5_mean",
+          0.590931
+        ],
+        [
+          "num__Prev_Brake_Pct",
+          0.232453
+        ],
+        [
+          "num__Straight_Ratio",
+          0.074169
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.021601
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.01826
+        ],
+        [
+          "num__Track_Temperature",
+          0.007241
+        ],
+        [
+          "num__Prev_Brake_Pct_roll5_slope",
+          0.007138
+        ],
+        [
+          "num__Humidity",
+          0.007099
+        ],
+        [
+          "num__Air_Temperature",
+          0.007047
+        ],
+        [
+          "num__Interval_Ahead",
+          0.007023
+        ],
+        [
+          "num__Pressure",
+          0.006694
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.004352
+        ],
+        [
+          "num__Lap",
+          0.004083
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.002607
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.001695
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.001675
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.001601
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.001226
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.001035
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.001033
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.000383
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.000372
+        ],
+        [
+          "num__missingindicator_Prev_Brake_Pct_roll5_slope",
+          0.000173
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          4.5e-05
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          4.3e-05
+        ],
+        [
+          "num__Rainfall",
+          1.9e-05
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_DRS_Pct": {
+      "persistence_mae": 2.4731,
+      "best_variant": "delta_slog",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 2.1408,
+        "rmse": 6.2402,
+        "r2": 0.5671
+      },
+      "rf_oof_2023_2024_mae": 2.1013,
+      "sgd": {
+        "mae": 16.3216,
+        "rmse": 552.2483,
+        "r2": -3389.5734
+      },
+      "tyre_importance_sum": 0.0518,
+      "importance": [
+        [
+          "num__Prev_DRS_Pct_roll5_slope",
+          0.301435
+        ],
+        [
+          "num__Interval_Ahead",
+          0.211278
+        ],
+        [
+          "num__Prev_DRS_Pct_roll5_mean",
+          0.120435
+        ],
+        [
+          "num__Straight_Ratio",
+          0.044922
+        ],
+        [
+          "num__Lap",
+          0.042652
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.030636
+        ],
+        [
+          "num__Total_Straight_Length",
+          0.02527
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.024776
+        ],
+        [
+          "num__Track_Temperature",
+          0.024037
+        ],
+        [
+          "num__Air_Temperature",
+          0.022633
+        ],
+        [
+          "num__Pressure",
+          0.02204
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.019375
+        ],
+        [
+          "num__Humidity",
+          0.018536
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.018474
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.018394
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.017142
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.007657
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.007551
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.006628
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.006595
+        ],
+        [
+          "num__missingindicator_Prev_DRS_Pct_roll5_slope",
+          0.003112
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.002434
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.00224
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          0.000902
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          0.000663
+        ],
+        [
+          "num__Rainfall",
+          0.000181
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_Max_Speed": {
+      "persistence_mae": 4.3097,
+      "best_variant": "delta_slog",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 3.9136,
+        "rmse": 7.5005,
+        "r2": 0.8577
+      },
+      "rf_oof_2023_2024_mae": 4.0307,
+      "sgd": {
+        "mae": 18.4312,
+        "rmse": 552.364,
+        "r2": -770.4883
+      },
+      "tyre_importance_sum": 0.11926,
+      "importance": [
+        [
+          "num__Prev_Max_Speed_roll5_slope",
+          0.278558
+        ],
+        [
+          "num__Prev_Max_Speed_roll5_mean",
+          0.126661
+        ],
+        [
+          "num__Interval_Ahead",
+          0.11688
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.050009
+        ],
+        [
+          "num__Lap",
+          0.049655
+        ],
+        [
+          "num__Track_Temperature",
+          0.044854
+        ],
+        [
+          "num__Air_Temperature",
+          0.035709
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.034542
+        ],
+        [
+          "num__Straight_Ratio",
+          0.030618
+        ],
+        [
+          "num__Pressure",
+          0.028332
+        ],
+        [
+          "num__Humidity",
+          0.027519
+        ],
+        [
+          "num__Log_Total_Straight_Length",
+          0.022089
+        ],
+        [
+          "num__Total_Straight_Length",
+          0.021415
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.017481
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.017449
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.01742
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.017058
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.017039
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.012846
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.012283
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.010508
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.004639
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.004343
+        ],
+        [
+          "num__missingindicator_Prev_Max_Speed_roll5_slope",
+          0.001118
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          0.000325
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          0.000302
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.000169
+        ],
+        [
+          "num__Rainfall",
+          0.000134
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          4.4e-05
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_Min_Speed": {
+      "persistence_mae": 4.1673,
+      "best_variant": "delta_slog",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 2.729,
+        "rmse": 5.6914,
+        "r2": 0.9636
+      },
+      "rf_oof_2023_2024_mae": 2.8057,
+      "sgd": {
+        "mae": 16.6477,
+        "rmse": 517.331,
+        "r2": -299.3521
+      },
+      "tyre_importance_sum": 0.17577,
+      "importance": [
+        [
+          "num__Prev_Min_Speed_roll5_slope",
+          0.366234
+        ],
+        [
+          "num__Prev_Min_Speed_roll5_mean",
+          0.124454
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.101443
+        ],
+        [
+          "num__Interval_Ahead",
+          0.061991
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.049236
+        ],
+        [
+          "num__Lap",
+          0.04052
+        ],
+        [
+          "num__Track_Temperature",
+          0.031338
+        ],
+        [
+          "num__Air_Temperature",
+          0.02972
+        ],
+        [
+          "num__Straight_Ratio",
+          0.022611
+        ],
+        [
+          "num__Humidity",
+          0.022361
+        ],
+        [
+          "num__Pressure",
+          0.019292
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.018593
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.017599
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.017491
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.016902
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.014083
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.01344
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.01231
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.007401
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.004999
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.004837
+        ],
+        [
+          "num__missingindicator_Prev_Min_Speed_roll5_slope",
+          0.00107
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          0.000989
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          0.000916
+        ],
+        [
+          "num__Rainfall",
+          0.00017
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.0
+        ]
+      ]
+    },
+    "Outcome_Avg_Gear": {
+      "persistence_mae": 0.1444,
+      "best_variant": "delta_slog",
+      "beat_persistence": true,
+      "rf": {
+        "mae": 0.1264,
+        "rmse": 0.2957,
+        "r2": 0.8778
+      },
+      "rf_oof_2023_2024_mae": 0.1338,
+      "sgd": {
+        "mae": 0.1427,
+        "rmse": 0.3501,
+        "r2": 0.8287
+      },
+      "tyre_importance_sum": 0.1578,
+      "importance": [
+        [
+          "num__Prev_Avg_Gear_roll5_slope",
+          0.431371
+        ],
+        [
+          "num__Tyre_Age_Total",
+          0.097752
+        ],
+        [
+          "num__Prev_Avg_Gear_roll5_mean",
+          0.068949
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.058712
+        ],
+        [
+          "num__Lap",
+          0.045764
+        ],
+        [
+          "num__Interval_Ahead",
+          0.036252
+        ],
+        [
+          "num__Track_Temperature",
+          0.029419
+        ],
+        [
+          "num__Straight_Ratio",
+          0.028334
+        ],
+        [
+          "num__Air_Temperature",
+          0.02611
+        ],
+        [
+          "num__Total_Straight_Length",
+          0.02042
+        ],
+        [
+          "num__Pressure",
+          0.01827
+        ],
+        [
+          "num__Humidity",
+          0.016241
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.014914
+        ],
+        [
+          "num__Log_Total_Sector_Length",
+          0.014907
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.014886
+        ],
+        [
+          "num__Tyre_Age_HARD",
+          0.014792
+        ],
+        [
+          "num__Tyre_Age_HARD_2",
+          0.014433
+        ],
+        [
+          "num__Tyre_Age_MEDIUM_2",
+          0.010275
+        ],
+        [
+          "num__missingindicator_Prev_Avg_Gear_roll5_slope",
+          0.010171
+        ],
+        [
+          "num__Tyre_Age_MEDIUM",
+          0.009735
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.007095
+        ],
+        [
+          "num__Tyre_Age_SOFT_2",
+          0.004412
+        ],
+        [
+          "num__Tyre_Age_SOFT",
+          0.00431
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE_2",
+          0.001143
+        ],
+        [
+          "num__Tyre_Age_INTERMEDIATE",
+          0.000958
+        ],
+        [
+          "num__Rainfall",
+          0.000311
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          6.5e-05
+        ],
+        [
+          "num__Tyre_Age_WET_2",
+          0.0
+        ],
+        [
+          "num__Tyre_Age_WET",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.0
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.0
+        ]
+      ]
+    }
+  },
+  "stage2": {
+    "pred": {
+      "rf_mae_s": 0.2305,
+      "rf_r2": 0.9927,
+      "sgd_mae_s": 0.2749,
+      "sgd_r2": 0.9847,
+      "knn_mae_s": 0.2473,
+      "knn_r2": 0.9909,
+      "importance": [
+        [
+          "num__Rel_Best_Duration_So_Far",
+          0.234707
+        ],
+        [
+          "num__missingindicator_Anchor_Age",
+          0.124092
+        ],
+        [
+          "num__Rep_Prev_Duration",
+          0.115901
+        ],
+        [
+          "num__Rel_Prev_Duration_roll5_mean",
+          0.088588
+        ],
+        [
+          "num__Track_Status_Inferred",
+          0.050504
+        ],
+        [
+          "num__Pred_Outcome_Avg_Gear",
+          0.035106
+        ],
+        [
+          "num__Total_Sector_Length",
+          0.030336
+        ],
+        [
+          "num__Rel_Rep_Best_Duration",
+          0.028319
+        ],
+        [
+          "num__Total_Distance_Driven",
+          0.025298
+        ],
+        [
+          "num__Lap",
+          0.022522
+        ],
+        [
+          "num__Rel_Clean_Pace",
+          0.020458
+        ],
+        [
+          "num__Prev_Sector_Duration",
+          0.017352
+        ],
+        [
+          "num__Pred_Outcome_Max_Speed",
+          0.017277
+        ],
+        [
+          "num__missingindicator_Rainfall_PrevLap",
+          0.016222
+        ],
+        [
+          "cat__Track_Status_SC",
+          0.014342
+        ],
+        [
+          "num__Pred_Outcome_Min_Speed",
+          0.013831
+        ],
+        [
+          "num__Track_Temperature",
+          0.012403
+        ],
+        [
+          "num__Prev_Lap_Pitted",
+          0.010152
+        ],
+        [
+          "num__Total_Straight_Length",
+          0.009027
+        ],
+        [
+          "cat__Track_Status_GREEN",
+          0.00881
+        ],
+        [
+          "num__missingindicator_Rainfall_Delta",
+          0.008622
+        ],
+        [
+          "num__missingindicator_Field_Wet_PrevLap",
+          0.008441
+        ],
+        [
+          "num__Pred_Outcome_Avg_Speed_Straight",
+          0.008352
+        ],
+        [
+          "num__Pressure",
+          0.006938
+        ],
+        [
+          "num__Rel_Rep_Median3",
+          0.006908
+        ],
+        [
+          "num__Humidity",
+          0.006111
+        ],
+        [
+          "num__Distance_On_Tyre",
+          0.005555
+        ],
+        [
+          "num__Laps_Since_SC",
+          0.005184
+        ],
+        [
+          "num__Pred_Outcome_Brake_Pct",
+          0.004891
+        ],
+        [
+          "num__Air_Temperature",
+          0.004788
+        ],
+        [
+          "num__Pred_Outcome_DRS_Pct",
+          0.004644
+        ],
+        [
+          "num__Pred_Outcome_Avg_Speed_Corners",
+          0.004004
+        ],
+        [
+          "num__Pred_Outcome_Full_Throttle_Pct",
+          0.003652
+        ],
+        [
+          "num__Traffic_Within_5s",
+          0.003391
+        ],
+        [
+          "num__Interval_Ahead",
+          0.003113
+        ],
+        [
+          "num__Pit_Stops_Done",
+          0.002754
+        ],
+        [
+          "num__Rel_roll5_slope",
+          0.002477
+        ],
+        [
+          "num__Traffic_Within_2s",
+          0.002325
+        ],
+        [
+          "num__Field_Wet_PrevLap",
+          0.002104
+        ],
+        [
+          "cat__Tyre_INTERMEDIATE",
+          0.00165
+        ],
+        [
+          "num__missingindicator_Rel_roll5_slope",
+          0.001572
+        ],
+        [
+          "num__Traffic_Within_1s",
+          0.001523
+        ],
+        [
+          "num__Rel_Prev_Duration",
+          0.001404
+        ],
+        [
+          "num__Anchor_Age",
+          0.001371
+        ],
+        [
+          "num__Prev_Lap_NonGreen",
+          0.001093
+        ],
+        [
+          "cat__Tyre_SOFT",
+          0.000608
+        ],
+        [
+          "num__Rainfall",
+          0.000404
+        ],
+        [
+          "cat__Tyre_HARD",
+          0.000238
+        ],
+        [
+          "cat__Tyre_MEDIUM",
+          0.000216
+        ],
+        [
+          "cat__Track_Status_SC_ENDING",
+          0.000208
+        ],
+        [
+          "num__Rainfall_PrevLap",
+          9.4e-05
+        ],
+        [
+          "num__Rainfall_Delta",
+          8.9e-05
+        ],
+        [
+          "cat__Track_Status_VSC_ENDING",
+          2.8e-05
+        ],
+        [
+          "cat__Tyre_WET",
+          0.0
+        ],
+        [
+          "num__missingindicator_Pred_Outcome_Avg_Speed_Straight",
+          0.0
+        ],
+        [
+          "cat__Track_Status_VSC",
+          0.0
+        ]
+      ],
+      "pred_importance_sum": 0.0918,
+      "breakdown": {
+        "overall": {
+          "mae_s": 0.2305,
+          "n": 70410
+        },
+        "clean_no_sc_vsc": {
+          "mae_s": 0.2168,
+          "n": 70004
+        },
+        "dry": {
+          "mae_s": 0.223,
+          "n": 69575
+        },
+        "wet": {
+          "mae_s": 0.8552,
+          "n": 835
+        },
+        "dry_clean": {
+          "mae_s": 0.2102,
+          "n": 69200
+        },
+        "wet_clean": {
+          "mae_s": 0.7885,
+          "n": 804
+        }
+      },
+      "anchor": "Rep_Prev_Duration"
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "2023": {
+    "rows": 71395,
+    "columns": 56,
+    "sessions": 22,
+    "drivers": 22,
+    "missing_pct": {
+      "Prev_Avg_Speed_Straight": 0.39,
+      "Prev_St_Speed": 0.0
+    },
+    "duplicate_keys": 0,
+    "duplicate_rows": 0,
+    "out_of_range": {
+      "Prev_Avg_Gear": 9
+    },
+    "sc_vsc_rows": 8403,
+    "sc_vsc_median_pace_ratio": 1.003,
+    "sessions_sc_at_full_pace": [
+      7787,
+      9181,
+      9205
+    ],
+    "rows_in_those_sessions_labelled_sc": 5988,
+    "outliers_iqr_high": 5351,
+    "outliers_iqr_low": 108,
+    "outliers_mad_rule_removed": 6195,
+    "unique_tyre": [
+      "HARD",
+      "INTERMEDIATE",
+      "MEDIUM",
+      "SOFT",
+      "WET"
+    ],
+    "unique_track_status": [
+      "GREEN",
+      "SC",
+      "SC_ENDING",
+      "VSC",
+      "VSC_ENDING"
+    ],
+    "num_corner_columns": 9
+  },
+  "2024": {
+    "rows": 77918,
+    "columns": 58,
+    "sessions": 24,
+    "drivers": 25,
+    "missing_pct": {
+      "Prev_Avg_Speed_Straight": 0.38
+    },
+    "duplicate_keys": 0,
+    "duplicate_rows": 0,
+    "out_of_range": {
+      "Prev_Avg_Gear": 4
+    },
+    "sc_vsc_rows": 2699,
+    "sc_vsc_median_pace_ratio": 1.299,
+    "sessions_sc_at_full_pace": [],
+    "rows_in_those_sessions_labelled_sc": 0,
+    "outliers_iqr_high": 5003,
+    "outliers_iqr_low": 109,
+    "outliers_mad_rule_removed": 4900,
+    "unique_tyre": [
+      "HARD",
+      "INTERMEDIATE",
+      "MEDIUM",
+      "SOFT",
+      "WET"
+    ],
+    "unique_track_status": [
+      "GREEN",
+      "SC",
+      "SC_ENDING",
+      "VSC",
+      "VSC_ENDING"
+    ],
+    "num_corner_columns": 11
+  },
+  "2025": {
+    "rows": 76952,
+    "columns": 55,
+    "sessions": 24,
+    "drivers": 21,
+    "missing_pct": {
+      "Prev_I2_Speed": 3.38,
+      "Prev_Avg_Speed_Straight": 0.08,
+      "Prev_St_Speed": 0.02,
+      "Prev_I1_Speed": 0.02
+    },
+    "duplicate_keys": 0,
+    "duplicate_rows": 0,
+    "out_of_range": {
+      "Prev_Avg_Gear": 1
+    },
+    "sc_vsc_rows": 4122,
+    "sc_vsc_median_pace_ratio": 1.351,
+    "sessions_sc_at_full_pace": [],
+    "rows_in_those_sessions_labelled_sc": 0,
+    "outliers_iqr_high": 5437,
+    "outliers_iqr_low": 125,
+    "outliers_mad_rule_removed": 6511,
+    "unique_tyre": [
+      "HARD",
+      "INTERMEDIATE",
+      "MEDIUM",
+      "SOFT"
+    ],
+    "unique_track_status": [
+      "GREEN",
+      "SC",
+      "SC_ENDING",
+      "VSC",
+      "VSC_ENDING"
+    ],
+    "num_corner_columns": 8
+  },
+  "corner_consistency": {
+    "circuit_sectors_in_2plus_years": 63,
+    "identical_corner_profile": 0
+  }
+}
