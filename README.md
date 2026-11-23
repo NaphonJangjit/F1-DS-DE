@@ -1,24 +1,5 @@
 # Formula 1 Sector Duration Analysis
 
-```{=html}
-<p align="center">
-```
-`<strong>`{=html}Predicting the Next Sector Time in Formula 1 from
-Point-in-Time OpenF1 Data`</strong>`{=html} `<br>`{=html}
-`<em>`{=html}CSS 342 --- Data Science and Data Engineering`</em>`{=html}
-```{=html}
-</p>
-```
-```{=html}
-<p align="center">
-```
-`<img src="https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white" alt="Python 3.14">`{=html}
-`<img src="https://img.shields.io/badge/Data%20Source-OpenF1-E10600" alt="OpenF1">`{=html}
-`<img src="https://img.shields.io/badge/ML-Two--Stage%20Random%20Forest-222222" alt="Two-Stage Random Forest">`{=html}
-`<img src="https://img.shields.io/badge/Validation-Time--based%20Holdout-2E8B57" alt="Time based holdout">`{=html}
-```{=html}
-</p>
-```
 โครงงานนี้พัฒนา **Data Pipeline และระบบ Machine Learning
 สำหรับพยากรณ์เวลาที่นักขับจะใช้ในเซกเตอร์ถัดไป** ของการแข่งขัน Formula 1
 โดยใช้ข้อมูลจาก OpenF1 API
